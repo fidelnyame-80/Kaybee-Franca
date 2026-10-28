@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Kaybee and Franca//Wedding//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:kaybee-franca-20261114@wedding
+DTSTAMP:20261028T000000Z
+DTSTART:20261114T100000Z
+SUMMARY:Kaybee and Franca's Wedding
+LOCATION:Anointed People Int.\, Foster Home\, Adenta-Frafraha
+DESCRIPTION:Wedding colour theme: Sunset in Bloom.
+END:VEVENT
+END:VCALENDAR
