@@ -9,7 +9,7 @@ import CoupleMemories from "./components/CoupleMemories";
 import VenueDirections from "./components/VenueDirections";
 import GiftDetails from "./components/GiftDetails";
 import ScrollReveal from "./components/ScrollReveal";
-import DecorativeVines from "./components/DecorativeVines";
+import DecorativeVines, { InvitationFlorals } from "./components/DecorativeVines";
 import { photos, wedding } from "./site-content";
 
 type PhotoSlotProps = {
@@ -59,6 +59,7 @@ export default function Home() {
 
 
         <section className="wedding-invitation" id="our-day" aria-labelledby="day-heading">
+          <InvitationFlorals />
           <ScrollReveal className="wedding-invitation__card">
             <p className="wedding-invitation__eyebrow">A DAY FOR LOVE. A LIFETIME TOGETHER.</p>
             <h2 className="wedding-invitation__heading" id="day-heading">

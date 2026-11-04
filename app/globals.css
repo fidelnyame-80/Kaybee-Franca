@@ -37,59 +37,28 @@ a { color: inherit; text-decoration: none; }
 }
 .decorative-vines__ornament {
   position: absolute;
-  overflow: visible;
+  width: clamp(76px, 19cqw, 138px);
   transform-origin: center;
-  opacity: .58;
 }
-.decorative-vines__sprig { width: clamp(54px, 10cqw, 88px); height: auto; }
-.decorative-vines__sprig--one {
-  top: 5%;
-  left: -12px;
-  animation: sprig-sway 9s ease-in-out infinite alternate;
-}
-.decorative-vines__sprig--two {
-  top: 43%;
-  right: -14px;
-  animation: sprig-sway-reverse 11s ease-in-out infinite alternate;
-}
-.decorative-vines__bloom { width: clamp(42px, 7cqw, 66px); height: auto; }
-.decorative-vines__bloom--one {
-  top: 21%;
-  right: 8px;
-  animation: bloom-drift 12s ease-in-out infinite alternate;
-}
-.decorative-vines__bloom--two {
-  top: 66%;
-  left: 7px;
-  animation: bloom-drift-reverse 10s ease-in-out infinite alternate;
-}
-.decorative-vines__heart {
-  top: 85%;
-  right: 4px;
-  width: clamp(45px, 8cqw, 72px);
-  height: auto;
-  animation: heart-drift 8s ease-in-out infinite alternate;
-}
-.decorative-vines__stroke {
-  stroke: #8e3b50;
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  opacity: .72;
-}
-.decorative-vines__petal {
-  fill: #a64e5f;
-  opacity: .48;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: leaf-sway 5s ease-in-out infinite alternate;
-}
-.decorative-vines__petal:nth-of-type(odd) { animation-delay: -2.5s; }
-.decorative-vines__center { fill: #d29a51; opacity: .55; }
-.decorative-vines__heart-path {
-  fill: rgba(243, 21, 120, .12);
-  stroke: #9e1344;
+.decorative-vines__ornament--left { left: -8cqw; }
+.decorative-vines__ornament--right { right: -8cqw; }
+.decorative-vines__ornament svg { display: block; width: 100%; height: auto; overflow: visible; opacity: .68; }
+.decorative-vines__ornament--right svg { transform: scaleX(-1); }
+.decorative-vines__stems, .decorative-vines__leaf-veins {
+  stroke: #8d6c58;
   stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
+.decorative-vines__leaf-veins { stroke: #8a8069; stroke-width: .8; opacity: .7; }
+.decorative-vines__leaves { fill: #b7b6a0; stroke: #93937d; stroke-width: 1; }
+.decorative-vines__petals { fill: #efb1ae; stroke: #b95d69; stroke-width: 1; }
+.decorative-vines__petals ellipse:nth-child(even) { fill: #f6d1bc; }
+.decorative-vines__center { fill: #d29a51; stroke: #a56e37; stroke-width: 1; }
+.decorative-vines__center-dot { fill: #8c4c3b; }
+.decorative-vines__buds { fill: #cf7f88; stroke: #9e5961; stroke-width: 1; }
+.decorative-vines__ribbon { stroke: #b17e70; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.decorative-vines__sparkles { fill: #c99c67; stroke: #c99c67; stroke-width: .8; }
 .site-shell { position: relative; z-index: 1; }
 
 .wedding-loader {
@@ -286,10 +255,21 @@ a { color: inherit; text-decoration: none; }
 .portrait--rsvp { background-image: linear-gradient(155deg, #c19277, #9e594a 58%, #663c3f); }
 
 .wedding-invitation {
+  position: relative;
+  overflow: hidden;
   padding: 9cqw 5cqw;
   background: #f4ecdf;
 }
+.invitation-florals { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.invitation-florals__sprig { width: clamp(120px, 31cqw, 220px); }
+.invitation-florals__sprig svg { opacity: .5; }
+.invitation-florals__sprig--top-left { top: -9cqw; left: -17cqw; }
+.invitation-florals__sprig--top-right { top: -4cqw; right: -17cqw; }
+.invitation-florals__sprig--bottom-left { bottom: -16cqw; left: -18cqw; }
+.invitation-florals__sprig--bottom-right { right: -18cqw; bottom: -12cqw; }
 .wedding-invitation__card {
+  position: relative;
+  z-index: 1;
   padding: 3cqw 4cqw;
   text-align: center;
 }
@@ -898,15 +878,6 @@ a { color: inherit; text-decoration: none; }
 .reveal--pending { visibility: hidden; opacity: 0; transform: translateY(12px); }
 .reveal--visible { visibility: visible; opacity: 1; transform: none; }
 
-@keyframes sprig-sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
-@keyframes sprig-sway-reverse { from { transform: rotate(4deg); } to { transform: rotate(-4deg); } }
-@keyframes bloom-drift { from { transform: translate(0, 0) rotate(-7deg); } to { transform: translate(-6px, 12px) rotate(7deg); } }
-@keyframes bloom-drift-reverse { from { transform: translate(0, 0) rotate(7deg); } to { transform: translate(6px, -10px) rotate(-7deg); } }
-@keyframes heart-drift { from { transform: translateY(-5px) rotate(-5deg); } to { transform: translateY(8px) rotate(6deg); } }
-@keyframes leaf-sway {
-  from { transform: rotate(-2deg) scale(.98); }
-  to { transform: rotate(2deg) scale(1.02); }
-}
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes question-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes dialog-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -1031,6 +1002,5 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   html { scroll-behavior: auto; }
-  .decorative-vines__ornament, .decorative-vines__petal { animation: none; }
   .reveal, .reveal--pending, .reveal--visible { visibility: visible; opacity: 1; transform: none; }
 }
