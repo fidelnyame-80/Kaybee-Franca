@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import WeddingLoader from "./components/WeddingLoader";
+import { photos } from "./site-content";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,6 +13,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <head>
+        <link rel="preload" href={photos.hero} as="image" fetchPriority="high" />
         <link
           rel="preload"
           href="/fonts/parisienne-normal-400.woff2"
