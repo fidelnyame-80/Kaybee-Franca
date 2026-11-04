@@ -171,7 +171,7 @@ a { color: inherit; text-decoration: none; }
   font: 600 clamp(9px, 2.3cqw, 13px)/1.4 var(--sans);
   letter-spacing: .24em;
 }
-.hero__eyebrow { margin: 0 0 2.2cqw; color: #f3dcc5; font-size: clamp(18px, 4.2cqw, 30px); letter-spacing: .12em; }
+.hero__eyebrow { margin: 0 0 2.2cqw; color: #f3dcc5; font-size: clamp(20px, 4.7cqw, 32px); letter-spacing: .12em; }
 .hero h1 {
   margin: 0;
   font: 400 clamp(35px, 10.2cqw, 74px)/1.2 var(--script);
@@ -212,7 +212,7 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 .info-band__copy { min-width: 0; text-align: center; }
-.section-kicker { margin: 0; color: var(--clay); font-size: clamp(17px, 4.2cqw, 30px); letter-spacing: .1em; }
+.section-kicker { margin: 0; color: var(--clay); font-size: clamp(19px, 4.7cqw, 32px); letter-spacing: .1em; }
 .info-band h2 {
   margin: 2.7cqw 0 0;
   font: 600 clamp(22px, 6.4cqw, 46px)/1.1 var(--display);
@@ -276,7 +276,7 @@ a { color: inherit; text-decoration: none; }
 .wedding-invitation__eyebrow {
   margin: 0 0 5cqw;
   color: var(--muted);
-  font: 500 clamp(17px, 4.2cqw, 30px)/1.35 var(--sans);
+  font: 600 clamp(19px, 4.7cqw, 32px)/1.35 var(--sans);
   letter-spacing: .1em;
 }
 .wedding-invitation__heading {
@@ -306,16 +306,16 @@ a { color: inherit; text-decoration: none; }
   font: 600 clamp(15px, 3.8cqw, 27px)/1.35 var(--display);
 }
 .wedding-invitation__time {
-  color: var(--muted);
-  font: 500 clamp(9px, 2cqw, 13px)/1.5 var(--sans);
-  letter-spacing: .18em;
+  color: var(--burgundy);
+  font: 700 clamp(15px, 3cqw, 20px)/1.5 var(--sans);
+  letter-spacing: .12em;
 }
 .countdown { margin-top: 6cqw; padding-top: 5cqw; border-top: 1px solid var(--line); }
 .countdown__caption {
   margin: 0 0 3.5cqw;
-  color: var(--muted);
-  font: 500 clamp(8px, 1.9cqw, 12px)/1.5 var(--sans);
-  letter-spacing: .2em;
+  color: var(--burgundy);
+  font: 700 clamp(14px, 3.1cqw, 20px)/1.5 var(--sans);
+  letter-spacing: .12em;
   text-transform: uppercase;
 }
 .countdown__clock { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; }
@@ -329,9 +329,9 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -.04em;
 }
 .countdown__label {
-  color: var(--muted);
-  font: 500 clamp(7px, 1.65cqw, 11px)/1.4 var(--sans);
-  letter-spacing: .13em;
+  color: var(--ink);
+  font: 600 clamp(10px, 2.1cqw, 14px)/1.4 var(--sans);
+  letter-spacing: .09em;
   text-transform: uppercase;
 }
 .wedding-invitation__closing {
@@ -342,7 +342,7 @@ a { color: inherit; text-decoration: none; }
   font: 400 clamp(19px, 5.5cqw, 38px)/1.4 var(--script);
 }
 .wedding-colours { margin-top: 5cqw; }
-.wedding-colours > span { color: var(--burgundy); font: 600 clamp(9px, 2cqw, 13px)/1.4 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+.wedding-colours > span { color: var(--burgundy); font: 700 clamp(12px, 2.5cqw, 16px)/1.4 var(--sans); letter-spacing: .1em; text-transform: uppercase; }
 .wedding-colours__swatches { display: flex; justify-content: center; gap: 1.8cqw; margin-top: 2cqw; }
 .wedding-colours__swatches i { width: clamp(13px, 3cqw, 21px); aspect-ratio: 1; border-radius: 50%; background: var(--pink); }
 .wedding-colours__swatches i:nth-child(2) { background: var(--burgundy); }
@@ -413,6 +413,11 @@ a { color: inherit; text-decoration: none; }
   color: var(--muted);
   font: italic clamp(17px, 3.7cqw, 25px)/1.3 var(--serif);
 }
+.photo-gallery__intro > p:last-child {
+  max-width: 72cqw;
+  color: var(--ink);
+  font: italic 500 clamp(21px, 5cqw, 32px)/1.3 var(--serif);
+}
 .photo-gallery__chapters { margin-top: 9cqw; text-align: left; }
 .photo-gallery__chapter + .photo-gallery__chapter { margin-top: 13cqw; }
 .photo-gallery__chapter-heading {
@@ -429,8 +434,8 @@ a { color: inherit; text-decoration: none; }
 .photo-gallery__chapter-heading p {
   margin: 0 0 1cqw;
   color: var(--rust);
-  font: 700 clamp(8px, 1.7cqw, 11px)/1.4 var(--sans);
-  letter-spacing: .14em;
+  font: 700 clamp(12px, 2.4cqw, 16px)/1.4 var(--sans);
+  letter-spacing: .1em;
 }
 .photo-gallery__chapter-heading h3 {
   margin: 0;
@@ -608,7 +613,7 @@ a { color: inherit; text-decoration: none; }
 .rsvp-band .date-line { margin-top: 4.6cqw; }
 .rsvp-band .rsvp { margin: 4.5cqw auto 0; }
 .rsvp-contacts { margin: 5cqw 0 0; padding-top: 4cqw; border-top: 1px solid var(--line); }
-.rsvp-contacts > p { margin: 0; color: var(--muted); font: 600 clamp(8px, 1.8cqw, 11px)/1.4 var(--sans); letter-spacing: .12em; }
+.rsvp-contacts > p { margin: 0; color: var(--muted); font: 600 clamp(12px, 2.4cqw, 16px)/1.4 var(--sans); letter-spacing: .1em; }
 .rsvp-contacts ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 2cqw 4cqw; margin: 2cqw 0 0; padding: 0; list-style: none; }
 .rsvp-contacts li { display: grid; justify-items: center; gap: 2px; }
 .rsvp-contacts li span { color: var(--muted); font: 600 clamp(8px, 1.6cqw, 10px)/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
@@ -617,7 +622,7 @@ a { color: inherit; text-decoration: none; }
 .gift-details { display: grid; gap: 2cqw; margin-top: 4cqw; }
 .gift-details__card { padding: 3cqw; border: 1px solid #e0c8b7; background: rgba(255, 250, 243, .76); text-align: left; }
 .gift-details__card--momo { background: #f8e9dc; }
-.gift-details__eyebrow { margin: 0 0 2cqw; color: var(--burgundy); font: 600 clamp(8px, 1.7cqw, 11px)/1.3 var(--sans); letter-spacing: .15em; }
+.gift-details__eyebrow { margin: 0 0 2cqw; color: var(--burgundy); font: 700 clamp(13px, 2.6cqw, 17px)/1.3 var(--sans); letter-spacing: .1em; }
 .gift-details dl { display: grid; gap: 1.5cqw; margin: 0; }
 .gift-details dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 6px; }
 .gift-details dt { color: var(--muted); font: 500 clamp(12px, 2.4cqw, 16px)/1.2 var(--serif); }
@@ -755,7 +760,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: .17em;
   text-transform: uppercase;
 }
-.quiz-eyebrow { font-size: clamp(17px, 4.2cqw, 30px); letter-spacing: .1em; }
+.quiz-eyebrow { font-size: clamp(19px, 4.7cqw, 32px); letter-spacing: .1em; }
 .quiz-counter { color: var(--burgundy); white-space: nowrap; }
 .quiz-progress { height: 2px; margin: 3.5cqw 0 0; background: #e7d5c6; overflow: hidden; }
 .quiz-progress-fill { display: block; height: 100%; background: var(--burgundy); transition: width .35s ease; }
@@ -855,7 +860,7 @@ a { color: inherit; text-decoration: none; }
 .rsvp-dialog::backdrop { background: rgba(37, 21, 22, .72); }
 .rsvp-panel { position: relative; padding: clamp(28px, 6vw, 48px); }
 .rsvp-close { position: absolute; top: 14px; right: 17px; width: 35px; height: 35px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: var(--burgundy); cursor: pointer; font: 30px/1 var(--serif); }
-.rsvp-eyebrow { margin: 0 0 10px; color: var(--clay); font: 600 clamp(17px, 4.2cqw, 30px)/1.4 var(--sans); letter-spacing: .1em; }
+.rsvp-eyebrow { margin: 0 0 10px; color: var(--clay); font: 600 clamp(19px, 4.7cqw, 32px)/1.4 var(--sans); letter-spacing: .1em; }
 .rsvp-title { margin: 0; color: var(--ink); font: 600 clamp(36px, 7vw, 58px)/1.1 var(--display); letter-spacing: -.035em; }
 .rsvp-intro { margin: 12px 0 25px; color: var(--muted); font: italic 20px/1.2 var(--serif); }
 .rsvp-form { display: grid; gap: 17px; }
