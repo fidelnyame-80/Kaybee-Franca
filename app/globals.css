@@ -663,6 +663,7 @@ a { color: inherit; text-decoration: none; }
 }
 .couple-memories__upload:hover { transform: translateY(-2px); background: #5c2736; }
 .couple-memories__upload input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+.couple-memories__upload:has(input:disabled) { opacity: .55; cursor: wait; }
 .couple-memories__upload:focus-within { outline: 2px solid var(--burgundy); outline-offset: 4px; }
 .couple-memories__upload span { font: 24px/1 var(--serif); }
 .couple-memories__privacy { max-width: 62cqw; margin: 2cqw auto 0; color: var(--muted); font: italic 14px/1.3 var(--serif); }
@@ -693,6 +694,32 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer;
   font: 22px/1 var(--serif);
 }
+.couple-memories__saved { margin-top: 8cqw; padding-top: 5cqw; border-top: 1px solid #dfbdb6; }
+.couple-memories__saved-heading { margin: 0; color: var(--ink); font: 600 clamp(20px, 4cqw, 28px)/1.2 var(--display); }
+.memory-moderator { margin: 7cqw auto 0; max-width: 420px; }
+.memory-moderator__toggle {
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid #bd9788;
+  background: transparent;
+  color: var(--burgundy);
+  cursor: pointer;
+  font: 600 13px/1.2 var(--sans);
+}
+.memory-moderator__panel {
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid #dfbdb6;
+  background: rgba(255, 250, 243, .8);
+  text-align: left;
+}
+.memory-moderator__panel form { display: grid; gap: 12px; }
+.memory-moderator__panel form p { margin: 0; color: var(--ink); font: 17px/1.3 var(--serif); }
+.memory-moderator__panel label { display: grid; gap: 5px; color: var(--ink); font: 600 13px/1.3 var(--sans); }
+.memory-moderator__panel input { min-width: 0; min-height: 44px; padding: 8px 10px; border: 1px solid #cdaea7; background: #fffdf9; color: var(--ink); }
+.memory-moderator__action { min-height: 44px; padding: 8px 16px; border: 0; background: var(--burgundy); color: white; cursor: pointer; font: 600 13px/1.2 var(--sans); }
+.memory-moderator__action:disabled { opacity: .55; cursor: wait; }
+.memory-moderator__message { margin: 10px 0 0; color: var(--burgundy); font: 15px/1.3 var(--serif); }
 .button {
   display: inline-flex;
   align-items: center;

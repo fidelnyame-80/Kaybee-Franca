@@ -10,12 +10,18 @@ import {
   saveMemory,
   type SavedMemory,
 } from "../lib/memories";
+import { memoryClient } from "../lib/shared-memories";
+import SharedMemories from "./SharedMemories";
 
 type MemoryPreview = SavedMemory & { preview: string };
 const MAX_FILE_SIZE = 15 * 1024 * 1024;
 const MAX_FILES_PER_UPLOAD = 10;
 
 export default function CoupleMemories() {
+  return memoryClient ? <SharedMemories savedOnDevice={<LocalMemories archived />} /> : <LocalMemories />;
+}
+
+function LocalMemories({ archived = false }: { archived?: boolean }) {
   const [memories, setMemories] = useState<MemoryPreview[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
@@ -164,14 +170,18 @@ export default function CoupleMemories() {
     }
   };
 
-  return (
-    <section className="couple-memories" id="memories" aria-labelledby="memories-heading">
-      <ScrollReveal className="couple-memories__intro">
+  if (archived && (isLoading || memories.length === 0)) return null;
+
+  const content = (
+    <>
+      {archived ? (
+        <h3 className="couple-memories__saved-heading">Photos saved on this device</h3>
+      ) : <ScrollReveal className="couple-memories__intro">
         <p className="section-kicker">MADE MORE SPECIAL BY YOU</p>
         <h2 id="memories-heading">Couple <em>memories</em></h2>
         <p>Have a favourite photo of the two of us? Add it to your personal memory wall.</p>
-      </ScrollReveal>
-      <ScrollReveal delay={0.1}>
+      </ScrollReveal>}
+      {!archived && <ScrollReveal delay={0.1}>
         <label className="couple-memories__upload">
         <input
           type="file"
@@ -183,9 +193,11 @@ export default function CoupleMemories() {
         <span aria-hidden="true">＋</span>
         {isUploading ? "ADDING PHOTOS…" : "ADD YOUR PHOTOS"}
         </label>
-      </ScrollReveal>
+      </ScrollReveal>}
       <p className="couple-memories__privacy">
-        Photos are saved in this browser on this device; they are not shared with other guests.
+        {archived
+          ? "These previously saved photos are private to this browser and device."
+          : "The shared wall is not set up yet. Photos are saved only in this browser on this device."}
       </p>
       <p className="couple-memories__status" role="status" aria-live="polite">
         {isLoading ? "Loading your saved photos…" : status}
@@ -220,6 +232,12 @@ export default function CoupleMemories() {
           ))}
         </div>
       )}
-    </section>
+    </>
+  );
+
+  return archived ? (
+    <div className="couple-memories__saved">{content}</div>
+  ) : (
+    <section className="couple-memories" id="memories" aria-labelledby="memories-heading">{content}</section>
   );
 }
