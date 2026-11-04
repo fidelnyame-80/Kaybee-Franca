@@ -5,13 +5,13 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const positions = [
-  { top: 4, motif: "leaves" }, { top: 10, motif: "ribbon" },
-  { top: 19, motif: "flower" }, { top: 25, motif: "leaves" },
-  { top: 34, motif: "ribbon" }, { top: 40, motif: "flower" },
-  { top: 49, motif: "leaves" }, { top: 55, motif: "ribbon" },
-  { top: 64, motif: "flower" }, { top: 70, motif: "leaves" },
-  { top: 79, motif: "ribbon" }, { top: 85, motif: "flower" },
-  { top: 93, motif: "leaves" }, { top: 97, motif: "ribbon" },
+  { top: 4, motif: "curves" }, { top: 10, motif: "shapes" },
+  { top: 19, motif: "flower" }, { top: 25, motif: "curves" },
+  { top: 34, motif: "ribbon" }, { top: 40, motif: "shapes" },
+  { top: 49, motif: "leaves" }, { top: 55, motif: "curves" },
+  { top: 64, motif: "shapes" }, { top: 70, motif: "flower" },
+  { top: 79, motif: "curves" }, { top: 85, motif: "ribbon" },
+  { top: 93, motif: "leaves" }, { top: 97, motif: "shapes" },
 ] as const;
 
 function Blossom({ x, y, size = 1, turn = 0 }: { x: number; y: number; size?: number; turn?: number }) {
@@ -113,6 +113,62 @@ function RibbonMotif() {
   );
 }
 
+function CurveMotif() {
+  return (
+    <svg viewBox="0 0 180 420" fill="none" focusable="false" aria-hidden="true">
+      <g className="decorative-vines__curves">
+        <path d="M-12 385c61-13 112-46 112-93 0-36-43-53-42-85 1-29 40-43 72-37 28 5 42 27 31 45-8 13-31 11-40-1-12-16-3-39 13-56 20-22 42-42 52-78" />
+        <path d="M-10 400c67-18 124-53 125-106 1-35-38-58-37-84 1-18 22-27 43-25" />
+        <path d="M13 122c19-17 49-16 66-3 13 10 15 27 3 34-9 6-22 1-22-9" />
+        <path d="M108 75c13-14 33-18 50-11" />
+      </g>
+      <g className="decorative-vines__forms">
+        <path d="M122 286c16-13 35-5 35 10s-19 21-34 10c-8-6-8-14-1-20Z" />
+        <ellipse cx="39" cy="182" rx="11" ry="18" transform="rotate(-32 39 182)" />
+      </g>
+      <g className="decorative-vines__sparkles">
+        <path d="M135 99c0 10-4 14-12 14 8 0 12 4 12 14 0-10 4-14 12-14-8 0-12-4-12-14Z" />
+        <circle cx="143" cy="336" r="2.5" />
+        <circle cx="24" cy="244" r="2" />
+      </g>
+    </svg>
+  );
+}
+
+function ShapesMotif() {
+  return (
+    <svg viewBox="0 0 180 420" fill="none" focusable="false" aria-hidden="true">
+      <g className="decorative-vines__curves">
+        <path d="M-8 373c55 3 97-19 117-56 18-33 16-65 47-85 13-8 27-11 40-11" />
+        <path d="M-7 387c60 3 106-20 128-58 19-32 19-58 49-73" />
+        <path d="M21 97c21-17 48-19 70-7 23 13 24 36 10 43-11 6-24-1-23-12 1-12 18-18 34-14 18 5 33 17 56 15" />
+        <path d="M61 276c21-8 41-5 54 6" />
+      </g>
+      <g className="decorative-vines__forms">
+        <path d="M122 144c14-13 35-10 42 3 8 15-6 27-21 25-17-2-32-17-21-28Z" />
+        <ellipse cx="47" cy="205" rx="13" ry="19" transform="rotate(32 47 205)" />
+        <circle cx="145" cy="355" r="5" />
+      </g>
+      <g className="decorative-vines__sparkles">
+        <path d="M137 49c0 10-4 14-12 14 8 0 12 4 12 14 0-10 4-14 12-14-8 0-12-4-12-14Z" />
+        <path d="M51 302c0 7-3 10-9 10 6 0 9 3 9 10 0-7 3-10 9-10-6 0-9-3-9-10Z" />
+        <circle cx="112" cy="201" r="2.5" />
+        <circle cx="37" cy="153" r="2" />
+      </g>
+    </svg>
+  );
+}
+
+function Ornament({ motif }: { motif: typeof positions[number]["motif"] }) {
+  switch (motif) {
+    case "flower": return <FloralSprig />;
+    case "leaves": return <LeafSprig />;
+    case "ribbon": return <RibbonMotif />;
+    case "curves": return <CurveMotif />;
+    case "shapes": return <ShapesMotif />;
+  }
+}
+
 function useFloralMotion(rootRef: RefObject<HTMLDivElement | null>) {
   useEffect(() => {
     if (!rootRef.current) return;
@@ -154,7 +210,7 @@ export default function DecorativeVines() {
           className={`decorative-vines__ornament decorative-vines__ornament--${index % 2 ? "right" : "left"}`}
           style={{ top: `${top}%` }}
         >
-          {motif === "flower" ? <FloralSprig /> : motif === "leaves" ? <LeafSprig /> : <RibbonMotif />}
+          <Ornament motif={motif} />
         </div>
       ))}
     </div>
@@ -172,7 +228,7 @@ export function InvitationFlorals() {
           key={placement}
           className={`decorative-vines__ornament invitation-florals__sprig invitation-florals__sprig--${placement}${index % 2 ? " decorative-vines__ornament--right" : ""}`}
         >
-          {index === 0 || index === 3 ? <FloralSprig /> : <LeafSprig />}
+          <Ornament motif={index === 0 || index === 3 ? "curves" : "shapes"} />
         </div>
       ))}
     </div>

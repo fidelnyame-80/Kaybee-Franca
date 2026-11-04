@@ -21,7 +21,7 @@ export default function ScrollReveal({
       className={className}
       initial={reduceMotion ? false : { opacity: 0, y: 34, filter: "blur(7px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: false, amount: 0.18 }}
+      viewport={{ once: true, amount: "some" }}
       transition={{
         duration: reduceMotion ? 0 : 0.85,
         delay: reduceMotion ? 0 : delay,

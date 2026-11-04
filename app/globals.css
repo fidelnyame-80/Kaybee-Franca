@@ -59,6 +59,9 @@ a { color: inherit; text-decoration: none; }
 .decorative-vines__buds { fill: #cf7f88; stroke: #9e5961; stroke-width: 1; }
 .decorative-vines__ribbon { stroke: #b17e70; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .decorative-vines__sparkles { fill: #c99c67; stroke: #c99c67; stroke-width: .8; }
+.decorative-vines__curves { stroke: #a76569; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.decorative-vines__forms { fill: #e3aca8; stroke: #c78983; stroke-width: 1; }
+.decorative-vines__forms > :nth-child(even) { fill: #e7c297; stroke: #c6a16f; }
 .site-shell { position: relative; z-index: 1; }
 
 .wedding-loader {
