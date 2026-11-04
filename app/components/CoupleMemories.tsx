@@ -1,0 +1,222 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { gsap } from "gsap";
+import ScrollReveal from "./ScrollReveal";
+import {
+  deleteMemory,
+  getSavedMemories,
+  saveMemory,
+  type SavedMemory,
+} from "../lib/memories";
+
+type MemoryPreview = SavedMemory & { preview: string };
+const MAX_FILE_SIZE = 15 * 1024 * 1024;
+const MAX_FILES_PER_UPLOAD = 10;
+
+export default function CoupleMemories() {
+  const [memories, setMemories] = useState<MemoryPreview[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
+  const [status, setStatus] = useState("");
+  const objectUrls = useRef(new Set<string>());
+  const animatedCards = useRef(new WeakSet<Element>());
+  const galleryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let disposed = false;
+    const activeObjectUrls = objectUrls.current;
+    void getSavedMemories()
+      .then((saved) => {
+        if (disposed) return;
+        const previews = saved.map((memory) => {
+          const preview = URL.createObjectURL(memory.image);
+          objectUrls.current.add(preview);
+          return { ...memory, preview };
+        });
+        setMemories(previews);
+      })
+      .catch((error: unknown) => {
+        if (!disposed) {
+          setStatus(
+            error instanceof Error
+              ? `Photo storage could not be opened: ${error.message}`
+              : "Photo storage could not be opened.",
+          );
+        }
+      })
+      .finally(() => {
+        if (!disposed) setIsLoading(false);
+      });
+
+    return () => {
+      disposed = true;
+      activeObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+      activeObjectUrls.clear();
+    };
+  }, []);
+
+  useEffect(() => {
+    const gallery = galleryRef.current;
+    if (!gallery || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const cards = gallery.querySelectorAll(".couple-memories__card");
+    const revealCard = (card: Element, index: number) => {
+      if (animatedCards.current.has(card)) return;
+      animatedCards.current.add(card);
+      gsap.fromTo(
+        card,
+        { autoAlpha: 0, y: 38, rotate: index % 2 ? 4 : -4 },
+        { autoAlpha: 1, y: 0, rotate: 0, duration: 0.75, ease: "power3.out" },
+      );
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      cards.forEach(revealCard);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          revealCard(entry.target, Array.from(cards).indexOf(entry.target));
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -5% 0px" },
+    );
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, [memories.length]);
+
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.currentTarget;
+    const files = Array.from(input.files ?? []);
+    input.value = "";
+    if (files.length === 0) return;
+    if (files.length > MAX_FILES_PER_UPLOAD) {
+      setStatus(`Please choose no more than ${MAX_FILES_PER_UPLOAD} photos at a time.`);
+      return;
+    }
+
+    const invalid = files.find(
+      (file) => !file.type.startsWith("image/") || file.size > MAX_FILE_SIZE,
+    );
+    if (invalid) {
+      setStatus(
+        !invalid.type.startsWith("image/")
+          ? "Please choose image files only."
+          : "Each photo must be smaller than 15 MB.",
+      );
+      return;
+    }
+
+    setIsUploading(true);
+    setStatus("Adding your photos…");
+    let added = 0;
+    const errors: string[] = [];
+
+    for (const file of files) {
+      const memory: SavedMemory = {
+        id: crypto.randomUUID(),
+        image: file,
+        addedAt: Date.now(),
+      };
+      try {
+        await saveMemory(memory);
+        const preview = URL.createObjectURL(file);
+        objectUrls.current.add(preview);
+        setMemories((current) => [...current, { ...memory, preview }]);
+        added += 1;
+      } catch (error) {
+        errors.push(
+          error instanceof Error ? error.message : "A photo could not be saved.",
+        );
+      }
+    }
+
+    setStatus(
+      errors.length
+        ? `${added} photo${added === 1 ? "" : "s"} added. ${errors.join(" ")}`
+        : `${added} photo${added === 1 ? "" : "s"} added and saved on this device.`,
+    );
+    setIsUploading(false);
+  };
+
+  const removeMemory = async (id: string) => {
+    try {
+      await deleteMemory(id);
+      const removed = memories.find((memory) => memory.id === id);
+      if (removed) {
+        URL.revokeObjectURL(removed.preview);
+        objectUrls.current.delete(removed.preview);
+      }
+      setMemories((current) => current.filter((memory) => memory.id !== id));
+      setStatus("Photo removed.");
+    } catch (error) {
+      setStatus(
+        error instanceof Error ? error.message : "Could not remove this photo.",
+      );
+    }
+  };
+
+  return (
+    <section className="couple-memories" id="memories" aria-labelledby="memories-heading">
+      <ScrollReveal className="couple-memories__intro">
+        <p className="section-kicker">MADE MORE SPECIAL BY YOU</p>
+        <h2 id="memories-heading">Couple <em>memories</em></h2>
+        <p>Have a favourite photo of the two of us? Add it to your personal memory wall.</p>
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <label className="couple-memories__upload">
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          disabled={isUploading}
+          onChange={handleUpload}
+        />
+        <span aria-hidden="true">＋</span>
+        {isUploading ? "ADDING PHOTOS…" : "ADD YOUR PHOTOS"}
+        </label>
+      </ScrollReveal>
+      <p className="couple-memories__privacy">
+        Photos are saved in this browser on this device; they are not shared with other guests.
+      </p>
+      <p className="couple-memories__status" role="status" aria-live="polite">
+        {isLoading ? "Loading your saved photos…" : status}
+      </p>
+      {!isLoading && memories.length === 0 ? (
+        <div className="couple-memories__empty" aria-live="polite">
+          <span aria-hidden="true">♡</span>
+          <p>Your photos will find a place here.</p>
+        </div>
+      ) : (
+        <div ref={galleryRef} className="couple-memories__gallery">
+          {memories.map((memory, index) => (
+            <figure className="couple-memories__card" key={memory.id}>
+              <Image
+                src={memory.preview}
+                alt={`A guest memory of Kaybee and Franca, photo ${index + 1}`}
+                fill
+                sizes="(max-width: 900px) 44vw, 230px"
+                unoptimized
+              />
+              <button
+                type="button"
+                aria-label={`Remove photo ${index + 1}`}
+                onClick={() => void removeMemory(memory.id)}
+              >
+                ×
+              </button>
+            </figure>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}

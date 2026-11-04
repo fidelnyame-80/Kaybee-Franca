@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import WeddingLoader from "./components/WeddingLoader";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,7 +11,25 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/parisienne-normal-400.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/cormorant-garamond-italic-400-500.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body>
+        <WeddingLoader>{children}</WeddingLoader>
+      </body>
     </html>
   );
 }

@@ -22,3 +22,24 @@ export const photos = {
   rsvp: "/image1.webp",
   closing: "/image3.webp",
 };
+
+export const couplePhotos = [
+  { src: "/image1.webp", alt: "Kaybee and Franca smiling together" },
+  { src: "/image2.webp", alt: "Kaybee and Franca dressed in black" },
+  { src: "/image3.webp", alt: "Kaybee and Franca outdoors" },
+  { src: "/image4.webp", alt: "Kaybee carrying Franca" },
+  { src: "/image6.webp", alt: "A cherished moment from Kaybee and Franca's story" },
+  { src: "/image7.webp", alt: "A cherished moment from Kaybee and Franca's story" },
+  { src: "/image8.webp", alt: "A cherished moment from Kaybee and Franca's story" },
+  { src: "/image9.webp", alt: "A cherished moment from Kaybee and Franca's story" },
+];
+
+export const galleryPhotos = couplePhotos;
+
+export const preloadImages = Array.from(
+  new Set([
+    ...Object.values(photos),
+    ...couplePhotos.map(({ src }) => src),
+    "/botanical.svg",
+  ]),
+);

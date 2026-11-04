@@ -1,8 +1,15 @@
-import type { CSSProperties } from "react";
 import Quiz from "./components/Quiz";
 import Reveal from "./components/Reveal";
 import Countdown from "./components/Countdown";
 import WeddingBingo from "./components/WeddingBingo";
+import HeroAnimation from "./components/HeroAnimation";
+import MomentsCarousel from "./components/MomentsCarousel";
+import PhotoGallery from "./components/PhotoGallery";
+import CoupleMemories from "./components/CoupleMemories";
+import VenueDirections from "./components/VenueDirections";
+import GiftDetails from "./components/GiftDetails";
+import ScrollReveal from "./components/ScrollReveal";
+import DecorativeVines from "./components/DecorativeVines";
 import { photos, wedding } from "./site-content";
 
 type PhotoSlotProps = {
@@ -25,9 +32,11 @@ function PhotoSlot({ src, label, className }: PhotoSlotProps) {
 export default function Home() {
   return (
     <div className="site-shell" id="top">
+      <DecorativeVines />
       <main>
         <section className="hero" aria-labelledby="hero-heading">
           <PhotoSlot src={photos.hero} label="Kaybee carrying Franca" className="hero__photo" />
+          <HeroAnimation />
           <div className="hero__content">
             <p className="hero__eyebrow ">A WEDDING CELEBRATION</p>
             <h1 id="hero-heading" aria-label="Kaybee & Franca">
@@ -36,7 +45,6 @@ export default function Home() {
                   <span
                     key={index}
                     className={`hero__letter${character === "&" ? " hero__letter--ampersand" : ""}`}
-                    style={{ "--type-delay": `${800 + index * 160}ms` } as CSSProperties}
                   >
                     {character}
                   </span>
@@ -51,7 +59,7 @@ export default function Home() {
 
 
         <section className="wedding-invitation" id="our-day" aria-labelledby="day-heading">
-          <div className="wedding-invitation__card">
+          <ScrollReveal className="wedding-invitation__card">
             <p className="wedding-invitation__eyebrow">A DAY FOR LOVE. A LIFETIME TOGETHER.</p>
             <h2 className="wedding-invitation__heading" id="day-heading">
               <span>The</span> WEDDING <span>of</span>
@@ -68,91 +76,103 @@ export default function Home() {
             </div>
             <p className="wedding-invitation__closing">We saved you a place in our forever.</p>
             <a className="calendar-link" href="/kaybee-franca-wedding.ics" download>ADD TO CALENDAR <span aria-hidden="true">↗</span></a>
-          </div>
+          </ScrollReveal>
         </section>
 
         <section className="moments" aria-labelledby="moments-heading">
-          <div className="moments__intro">
+          <ScrollReveal className="moments__intro">
             <p className="section-kicker">A LITTLE LOOK AT US</p>
             <h2 id="moments-heading">Our kind of <em>forever</em></h2>
-            <p>Four little moments, one big love. We can&apos;t wait to make more memories with you.</p>
-          </div>
-          <div className="moments__grid">
-            <PhotoSlot src="/image1.webp" label="Kaybee and Franca smiling together" className="moments__photo" />
-            <PhotoSlot src="/image2.webp" label="Kaybee and Franca in black outfits" className="moments__photo" />
-            <PhotoSlot src="/image3.webp" label="Kaybee and Franca together outdoors" className="moments__photo" />
-            <PhotoSlot src="/image4.webp" label="Kaybee carrying Franca" className="moments__photo" />
-          </div>
-          <p className="moments__caption">the best is yet to come <span aria-hidden="true">♥</span></p>
+            <p>A few little moments, one big love. We can&apos;t wait to make more memories with you.</p>
+          </ScrollReveal>
+          <ScrollReveal><MomentsCarousel /></ScrollReveal>
+          <ScrollReveal delay={0.12}><p className="moments__caption">the best is yet to come <span aria-hidden="true">♥</span></p></ScrollReveal>
+        </section>
+
+        <section className="photo-gallery" id="gallery" aria-labelledby="gallery-heading">
+          <ScrollReveal className="photo-gallery__intro">
+            <p className="section-kicker">THE PHOTO GALLERY</p>
+            <h2 id="gallery-heading">Little pieces of <em>forever</em></h2>
+            <p>A few favourite frames from our story.</p>
+          </ScrollReveal>
+          <ScrollReveal><PhotoGallery /></ScrollReveal>
         </section>
 
         <section className="colour-story" aria-labelledby="colour-heading">
-          <p className="section-kicker">A LITTLE INSPIRATION</p>
-          <h2 id="colour-heading">Sunset in <em>Bloom</em></h2>
-          <p>Think vibrant pink, rich burgundy, warm orange and soft yellow. Come ready to celebrate in colour.</p>
-          <div className="colour-story__palette" aria-label="Pink, burgundy, orange and pale yellow">
-            <span>Pink</span><span>Burgundy</span><span>Orange</span><span>Yellow</span>
-          </div>
+          <ScrollReveal>
+            <p className="section-kicker">A LITTLE INSPIRATION</p>
+            <h2 id="colour-heading">Sunset in <em>Bloom</em></h2>
+            <p>Think vibrant pink, rich burgundy, warm orange and soft yellow. Come ready to celebrate in colour.</p>
+            <div className="colour-story__palette" aria-label="Pink, burgundy, orange and pale yellow">
+              <span>Pink</span><span>Burgundy</span><span>Orange</span><span>Yellow</span>
+            </div>
+          </ScrollReveal>
         </section>
 
         <section className="info-band venue" id="venue" aria-labelledby="venue-heading" style={{ backgroundImage: `url("${photos.venue}")` }}>
-          <Reveal className="info-band__copy venue__copy">
+          <ScrollReveal><Reveal className="info-band__copy venue__copy">
             <p className="section-kicker">WHERE WE&apos;LL GATHER</p>
             <h2 id="venue-heading">THE VENUE</h2>
             <p className="venue__name">{wedding.venueName}</p>
             <p className="venue__address">{wedding.venueDescription}</p>
-            {wedding.mapUrl ? (
-              <a className="venue__directions" href={wedding.mapUrl} target="_blank" rel="noopener noreferrer">DIRECTIONS</a>
-            ) : (
-              <button className="venue__directions" type="button" disabled title="Directions will be added when the venue is confirmed">DIRECTIONS SOON</button>
-            )}
-          </Reveal>
+            <VenueDirections />
+          </Reveal></ScrollReveal>
         </section>
 
         <section className="info-band rsvp-band" id="rsvp" aria-labelledby="rsvp-heading">
           <div className="portrait-frame portrait-frame--rsvp">
             <PhotoSlot src={photos.rsvp} label="Kaybee and Franca portrait" className="portrait portrait--rsvp" />
           </div>
-          <Reveal className="info-band__copy rsvp-band__copy">
-            <p className="section-kicker">WE HOPE YOU&apos;LL JOIN US</p>
-            <h2 id="rsvp-heading">KINDLY RSVP</h2>
-            <p className="section-intro">For RSVPs or wedding-day questions, please call.</p>
-            <ul className="rsvp-contacts">
-              {wedding.rsvpContacts.map(({ name, phone }) => (
-                <li key={phone}>
-                  <span>{name}</span>
-                  <a href={`tel:${phone}`}>{phone}</a>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+          <ScrollReveal><Reveal className="info-band__copy rsvp-band__copy">
+            <p className="section-kicker">A GIFT OF LOVE</p>
+            <h2 id="rsvp-heading">SHOW US SOME LOVE</h2>
+            <p className="section-intro">Your presence is the greatest gift. If you wish to bless us, you can find our details below.</p>
+            <GiftDetails />
+            <div className="rsvp-contacts">
+              <p>RSVP OR WEDDING-DAY QUESTIONS</p>
+              <ul>
+                {wedding.rsvpContacts.map(({ name, phone }) => (
+                  <li key={phone}>
+                    <span>{name}</span>
+                    <a href={`tel:${phone}`}>{phone}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal></ScrollReveal>
         </section>
 
+        <CoupleMemories />
+
         <section className="quiz-band" id="quiz" aria-labelledby="quiz-heading">
-          <Reveal className="quiz-intro">
+          <ScrollReveal><Reveal className="quiz-intro">
             <p className="section-kicker">A LITTLE GAME</p>
             <h2 id="quiz-heading">How well do you <em>know</em> the couple?</h2>
             <p>Ten quick questions, just for fun.</p>
-          </Reveal>
-          <Reveal className="quiz-wrap" delay={80}>
+          </Reveal></ScrollReveal>
+          <ScrollReveal delay={0.12}><Reveal className="quiz-wrap" delay={80}>
             <Quiz />
-          </Reveal>
+          </Reveal></ScrollReveal>
         </section>
 
-        <section className="bingo-band" aria-labelledby="bingo-heading">
-          <p className="section-kicker">LET THE GOOD TIMES BLOOM</p>
-          <h2 id="bingo-heading">Wedding day <em>bingo</em></h2>
-          <p>Little moments make the best memories. How many can you find?</p>
-          <WeddingBingo />
+        <section className="bingo-band" id="bingo" aria-labelledby="bingo-heading">
+          <ScrollReveal>
+            <p className="section-kicker">LET THE GOOD TIMES BLOOM</p>
+            <h2 id="bingo-heading">Wedding day <em>bingo</em></h2>
+            <p>Little moments make the best memories. How many can you find?</p>
+            <WeddingBingo />
+          </ScrollReveal>
         </section>
 
         <section className="closing-photo" aria-label="Kaybee and Franca photo">
           <PhotoSlot src={photos.closing} label="Kaybee and Franca together" className="closing-photo__image" />
-          <p>See you at the celebration.</p>
+          <ScrollReveal><p className="text-white">See you at the celebration.</p></ScrollReveal>
         </section>
         <section className="wedding-verse" aria-label="Wedding scripture">
-          <p>“He hath made everything beautiful in his time...”</p>
-          <span>ECCLESIASTES 3:11</span>
+          <ScrollReveal>
+            <p>“He hath made everything beautiful in his time...”</p>
+            <span>ECCLESIASTES 3:11</span>
+          </ScrollReveal>
         </section>
       </main>
       <footer className="site-footer">
