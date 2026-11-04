@@ -199,7 +199,6 @@ export default function CoupleMemories() {
         <div ref={galleryRef} className="couple-memories__gallery">
           {memories.map((memory, index) => (
             <figure className="couple-memories__card" key={memory.id}>
-              <span className="photo-gallery__pin" aria-hidden="true" />
               <div className="couple-memories__photo">
                 <Image
                   src={memory.preview}

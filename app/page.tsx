@@ -79,7 +79,7 @@ export default function Home() {
           </ScrollReveal>
         </section>
 
-        <section className="moments" aria-labelledby="moments-heading">
+        <section className="moments" id="moments" aria-labelledby="moments-heading">
           <ScrollReveal className="moments__intro">
             <p className="section-kicker">A LITTLE LOOK AT US</p>
             <h2 id="moments-heading">Our kind of <em>forever</em></h2>

@@ -25,7 +25,6 @@ export default function PhotoGallery() {
 
   const prints = (photos: Photo[]) => photos.map((photo, index) => (
     <figure className="photo-gallery__item" key={photo.src}>
-      <span className="photo-gallery__pin" aria-hidden="true" />
       <button
         className="photo-gallery__photo"
         type="button"
@@ -63,12 +62,10 @@ export default function PhotoGallery() {
           {historyPhotos.length ? prints(historyPhotos) : (
             <>
               <figure className="photo-gallery__item photo-gallery__item--placeholder">
-                <span className="photo-gallery__pin" aria-hidden="true" />
                 <div className="photo-gallery__empty" aria-hidden="true"><span>♡</span></div>
                 <figcaption>Our story</figcaption>
               </figure>
               <figure className="photo-gallery__item photo-gallery__item--placeholder">
-                <span className="photo-gallery__pin" aria-hidden="true" />
                 <div className="photo-gallery__empty" aria-hidden="true"><span>♡</span></div>
                 <figcaption>More memories to come</figcaption>
               </figure>
