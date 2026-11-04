@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { preloadImages } from "../site-content";
+import { photos } from "../site-content";
 import FloatingMenu from "./FloatingMenu";
 
 export default function WeddingLoader({
@@ -68,70 +68,64 @@ export default function WeddingLoader({
       );
 
     let exit: gsap.core.Timeline | undefined;
-    const imageLoads = preloadImages.map(
-      (src) =>
-        new Promise<void>((resolve) => {
-          const image = new Image();
-          let complete = false;
-          const finish = () => {
-            if (complete) return;
-            complete = true;
-            resolve();
-          };
-          image.onload = finish;
-          image.onerror = finish;
-          image.src = src;
-          if (image.complete) finish();
-        }),
-    );
+    let finished = false;
+    const finish = () => {
+      if (cancelled || finished) return;
+      finished = true;
+      intro.kill();
+      exit?.kill();
+      window.clearTimeout(fallback);
+      gsap.set(page, { clearProps: "transform,opacity,visibility" });
+      document.body.style.overflow = previousOverflow;
+      window.dispatchEvent(new Event("wedding-site-ready"));
+      setIsLoading(false);
+    };
 
-    void Promise.all([
-      ...imageLoads,
-      document.fonts.load('400 64px "Parisienne"'),
-      document.fonts.load('italic 400 24px "Cormorant Garamond"'),
-      document.fonts.ready,
-    ]).then(() => {
-      if (cancelled) return;
+    // Welcome guests while the hero loads, but do not wait for the gallery.
+    const hero = new Image();
+    const heroReady = new Promise<void>((resolve) => {
+      hero.onload = () => resolve();
+      hero.onerror = () => resolve();
+      hero.src = photos.hero;
+      if (hero.complete) resolve();
+    });
 
-      intro.play();
-      void intro.then().then(() => {
-        if (cancelled) return;
+    // A stalled request or animation must not leave the welcome screen up forever.
+    const fallback = window.setTimeout(finish, 5000);
+    intro.timeScale(2).play();
+    void Promise.all([intro.then(), heroReady]).then(() => {
+      if (cancelled || finished) return;
 
-        exit = gsap
-          .timeline({
-            onComplete: () => {
-              if (cancelled) return;
-              gsap.set(page, { clearProps: "transform,opacity,visibility" });
-              document.body.style.overflow = previousOverflow;
-              window.dispatchEvent(new Event("wedding-site-ready"));
-              setIsLoading(false);
-            },
-          })
-          .fromTo(
-            page,
-            { autoAlpha: 0, y: 12 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: reduceMotion ? 0 : 0.5,
-              ease: "power2.out",
-            },
-            0,
-          )
-          .to(
-            loader,
-            {
-              yPercent: -100,
-              duration: reduceMotion ? 0 : 0.8,
-              ease: "power3.inOut",
-            },
-            reduceMotion ? 0 : 0.12,
-          );
-      });
+      exit = gsap
+        .timeline({ onComplete: finish })
+        .fromTo(
+          page,
+          { autoAlpha: 0, y: 12 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: reduceMotion ? 0 : 0.5,
+            ease: "power2.out",
+          },
+          0,
+        )
+        .to(
+          loader,
+          {
+            yPercent: -100,
+            duration: reduceMotion ? 0 : 0.8,
+            ease: "power3.inOut",
+          },
+          reduceMotion ? 0 : 0.12,
+        )
+        .timeScale(2);
     });
 
     return () => {
       cancelled = true;
+      window.clearTimeout(fallback);
+      hero.onload = null;
+      hero.onerror = null;
       intro.kill();
       exit?.kill();
       document.body.style.overflow = previousOverflow;

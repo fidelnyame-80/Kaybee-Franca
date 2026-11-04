@@ -35,11 +35,3 @@ export const couplePhotos = [
 ];
 
 export const galleryPhotos = couplePhotos;
-
-export const preloadImages = Array.from(
-  new Set([
-    ...Object.values(photos),
-    ...couplePhotos.map(({ src }) => src),
-    "/botanical.svg",
-  ]),
-);
