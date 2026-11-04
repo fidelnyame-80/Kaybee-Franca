@@ -64,13 +64,13 @@ export default function CoupleMemories() {
     }
 
     const cards = gallery.querySelectorAll(".couple-memories__card");
-    const revealCard = (card: Element, index: number) => {
+    const revealCard = (card: Element) => {
       if (animatedCards.current.has(card)) return;
       animatedCards.current.add(card);
       gsap.fromTo(
         card,
-        { autoAlpha: 0, y: 38, rotate: index % 2 ? 4 : -4 },
-        { autoAlpha: 1, y: 0, rotate: 0, duration: 0.75, ease: "power3.out" },
+        { autoAlpha: 0, y: 38 },
+        { autoAlpha: 1, y: 0, clearProps: "transform", duration: 0.75, ease: "power3.out" },
       );
     };
 
@@ -84,7 +84,7 @@ export default function CoupleMemories() {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           observer.unobserve(entry.target);
-          revealCard(entry.target, Array.from(cards).indexOf(entry.target));
+          revealCard(entry.target);
         });
       },
       { threshold: 0.15, rootMargin: "0px 0px -5% 0px" },
@@ -199,13 +199,17 @@ export default function CoupleMemories() {
         <div ref={galleryRef} className="couple-memories__gallery">
           {memories.map((memory, index) => (
             <figure className="couple-memories__card" key={memory.id}>
-              <Image
-                src={memory.preview}
-                alt={`A guest memory of Kaybee and Franca, photo ${index + 1}`}
-                fill
-                sizes="(max-width: 900px) 44vw, 230px"
-                unoptimized
-              />
+              <span className="photo-gallery__pin" aria-hidden="true" />
+              <div className="couple-memories__photo">
+                <Image
+                  src={memory.preview}
+                  alt={`A guest memory of Kaybee and Franca, photo ${index + 1}`}
+                  fill
+                  sizes="(max-width: 900px) 44vw, 230px"
+                  unoptimized
+                />
+              </div>
+              <figcaption>A moment to keep</figcaption>
               <button
                 type="button"
                 aria-label={`Remove photo ${index + 1}`}

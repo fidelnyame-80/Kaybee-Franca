@@ -93,7 +93,7 @@ export default function Home() {
           <ScrollReveal className="photo-gallery__intro">
             <p className="section-kicker">THE PHOTO GALLERY</p>
             <h2 id="gallery-heading">Little pieces of <em>forever</em></h2>
-            <p>A few favourite frames from our story.</p>
+            <p>Our favourite moments, gathered in one place.</p>
           </ScrollReveal>
           <ScrollReveal><PhotoGallery /></ScrollReveal>
         </section>
@@ -166,7 +166,7 @@ export default function Home() {
 
         <section className="closing-photo" aria-label="Kaybee and Franca photo">
           <PhotoSlot src={photos.closing} label="Kaybee and Franca together" className="closing-photo__image" />
-          <ScrollReveal><p className="text-white">See you at the celebration.</p></ScrollReveal>
+          <ScrollReveal className="closing-photo__caption"><p>See you at the celebration.</p></ScrollReveal>
         </section>
         <section className="wedding-verse" aria-label="Wedding scripture">
           <ScrollReveal>

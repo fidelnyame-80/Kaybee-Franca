@@ -13,7 +13,7 @@ Open http://localhost:3000. Build the static site with `bun run build`.
 
 ## Add the photos and details
 
-Put site photos in `public/`, then update the paths and descriptions in [`app/site-content.ts`](app/site-content.ts). The home page gallery uses each unique wedding photo; exact duplicate files should only be included once.
+Put site photos in `public/`, then update the paths and descriptions in [`app/site-content.ts`](app/site-content.ts). The pre-wedding gallery uses `preWeddingPhotos`; add older photos to the `historyPhotos` array to replace its placeholders. Each entry uses `{ src: "/photo.webp", alt: "Description of the photo" }`.
 
 The Couple Memories section accepts image uploads and stores them in IndexedDB in the visitor's browser. Since this site is exported as a static site and has no upload service, these photos are private to that browser and device; they are not sent to the site or visible to other guests. Shared uploads require a storage backend.
 
