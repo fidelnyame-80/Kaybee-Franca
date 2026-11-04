@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 46" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 48" fill="none">
   <defs>
-    <radialGradient id="head" cx=".3" cy=".22" r=".8">
-      <stop stop-color="#ffb4ad"/><stop offset=".42" stop-color="#c33f5b"/><stop offset="1" stop-color="#71172e"/>
+    <radialGradient id="head" cx=".33" cy=".25" r=".8">
+      <stop stop-color="#cc9290"/><stop offset=".55" stop-color="#974456"/><stop offset="1" stop-color="#71313d"/>
     </radialGradient>
-    <linearGradient id="needle" x1="14" y1="23" x2="18" y2="23" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#55483d"/><stop offset=".5" stop-color="#e2d4b5"/><stop offset="1" stop-color="#74675a"/>
+    <linearGradient id="steel" x1="13" y1="24" x2="20" y2="26" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#766a5e"/><stop offset=".48" stop-color="#e7ddc9"/><stop offset="1" stop-color="#8a7c6c"/>
     </linearGradient>
   </defs>
-  <path d="M16 24v18l2-4 1-14z" fill="#593d32" opacity=".2"/>
-  <path d="M14.7 22h2.6L16 42z" fill="url(#needle)"/>
-  <ellipse cx="16" cy="23" rx="9" ry="3.5" fill="#66182a" opacity=".38"/>
-  <ellipse cx="16" cy="20" rx="9" ry="4" fill="#8e253d"/>
-  <circle cx="16" cy="13" r="10" fill="url(#head)" stroke="#7d1c33" stroke-width=".8"/>
-  <ellipse cx="12.5" cy="9" rx="3" ry="1.7" fill="#fff2e9" opacity=".5" transform="rotate(-35 12.5 9)"/>
+  <ellipse cx="22" cy="39" rx="7" ry="2.4" fill="#513329" opacity=".17" transform="rotate(-18 22 39)"/>
+  <path d="M13 19.5 16.2 19l5.3 20.2-2.4-2.3z" fill="url(#steel)" stroke="#776a5b" stroke-width=".35"/>
+  <ellipse cx="16.5" cy="22" rx="8" ry="2.7" fill="#4f302c" opacity=".2"/>
+  <ellipse cx="14.3" cy="17.5" rx="8" ry="3.4" fill="#71313d"/>
+  <ellipse cx="14" cy="12.5" rx="8.5" ry="8" fill="url(#head)" stroke="#70323e" stroke-width=".7"/>
+  <path d="M9.6 9.7a5 5 0 0 1 4.2-2.1" stroke="#f3d4c5" stroke-linecap="round" stroke-width="1" opacity=".55"/>
 </svg>
