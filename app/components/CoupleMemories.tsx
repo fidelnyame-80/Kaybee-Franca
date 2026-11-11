@@ -178,8 +178,8 @@ function LocalMemories({ archived = false }: { archived?: boolean }) {
         <h3 className="couple-memories__saved-heading">Photos saved on this device</h3>
       ) : <ScrollReveal className="couple-memories__intro">
         <p className="section-kicker">MADE MORE SPECIAL BY YOU</p>
-        <h2 id="memories-heading">Couple <em>memories</em></h2>
-        <p>Have a favourite photo of the two of us? Add it to your personal memory wall.</p>
+        <h2 id="memories-heading">Wedding <em>memories</em></h2>
+        <p>Captured a moment from our wedding? We would love to see the photos and videos our camera team might miss.</p>
       </ScrollReveal>}
       {!archived && <ScrollReveal delay={0.1}>
         <label className="couple-memories__upload">
@@ -197,7 +197,7 @@ function LocalMemories({ archived = false }: { archived?: boolean }) {
       <p className="couple-memories__privacy">
         {archived
           ? "These previously saved photos are private to this browser and device."
-          : "The shared wall is not set up yet. Photos are saved only in this browser on this device."}
+          : "Sharing isn't ready yet. For now, only photos can be saved in this browser on this device."}
       </p>
       <p className="couple-memories__status" role="status" aria-live="polite">
         {isLoading ? "Loading your saved photos…" : status}
@@ -221,8 +221,16 @@ function LocalMemories({ archived = false }: { archived?: boolean }) {
                 />
               </div>
               <figcaption>A moment to keep</figcaption>
+              <a
+                className="couple-memories__download"
+                href={memory.preview}
+                download={`wedding-memory-${index + 1}.${(memory.image.type.split("/")[1] || "jpg").replace(/[^a-z0-9]/gi, "")}`}
+              >
+                Download
+              </a>
               <button
                 type="button"
+                className="couple-memories__remove"
                 aria-label={`Remove photo ${index + 1}`}
                 onClick={() => void removeMemory(memory.id)}
               >

@@ -32,7 +32,7 @@ export default function MemoryModerator({ onAccessChange }: { onAccessChange: (a
           .then(({ data, error }) => {
             if (!active || current !== version) return;
             onAccessChange(Boolean(data) && !error);
-            setMessage(error ? "Could not check moderation access." : data ? "You can now remove shared photos." : "This account does not have moderation access.");
+            setMessage(error ? "Could not check moderation access." : data ? "You can now remove shared memories." : "This account does not have moderation access.");
           });
       }, 0);
       timers.add(timer);
@@ -68,7 +68,7 @@ export default function MemoryModerator({ onAccessChange }: { onAccessChange: (a
   return (
     <div className="memory-moderator">
       <button className="memory-moderator__toggle" type="button" aria-expanded={open} onClick={() => setOpen(!open)}>
-        {open ? "Close photo management" : "Manage photos"}
+        {open ? "Close memory management" : "Manage memories"}
       </button>
       {open && (
         <div className="memory-moderator__panel">
@@ -76,7 +76,7 @@ export default function MemoryModerator({ onAccessChange }: { onAccessChange: (a
             <button className="memory-moderator__action" type="button" onClick={() => void signOut()} disabled={busy}>Sign out</button>
           ) : (
             <form onSubmit={(event) => void signIn(event)}>
-              <p>Sign in to remove photos from the shared wall.</p>
+              <p>Sign in to remove photos and videos from the shared wall.</p>
               <label>Email<input type="email" autoComplete="username" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>
               <label>Password<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required /></label>
               <button className="memory-moderator__action" type="submit" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>

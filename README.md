@@ -15,11 +15,11 @@ Open http://localhost:3000. Build the static site with `bun run build`.
 
 Put site photos in `public/`, then update the paths and descriptions in [`app/site-content.ts`](app/site-content.ts). The pre-wedding gallery uses `preWeddingPhotos`; add older photos to the `historyPhotos` array to replace its placeholders. Each entry uses `{ src: "/photo.webp", alt: "Description of the photo" }`.
 
-## Shared guest photos and moderation
+## Shared wedding memories and moderation
 
-The Couple Memories wall can use a Supabase project so photos are published without approval and the open wall refreshes periodically. Guests can add JPG, PNG, WebP and GIF images up to 15 MB each. Only explicitly authorized moderator accounts can remove shared photos. The Supabase storage policies enforce this even if someone alters the website in their browser.
+The Wedding Memories wall can use a Supabase project so guest photos and short videos are published without approval and the open wall refreshes periodically. Guests can add JPG, PNG, WebP and GIF images up to 15 MB each, and MP4, MOV and WebM videos up to 50 MB each. Larger files use chunked uploads that retry interruptions. Visitors can view and download the memories. Only explicitly authorized moderator accounts can remove shared items. The Supabase storage policies enforce this even if someone alters the website in their browser.
 
-1. Create a Supabase project. In its SQL Editor, run [`supabase/wedding-memories.sql`](supabase/wedding-memories.sql). This creates a public photo bucket and the required row-level security policies.
+1. Create a Supabase project. In its SQL Editor, run [`supabase/wedding-memories.sql`](supabase/wedding-memories.sql). This creates a public media bucket and the required row-level security policies. If you previously ran the photo-only version, run the updated script again to permit videos and the larger limit. Check that the project's global Storage file-size limit also permits 50 MB uploads.
 2. In Supabase Authentication → Users, create an email/password user for the person moderating the wall and confirm the user. In the SQL Editor, replace the address below with that user's email and run the query:
 
    ```sql
@@ -30,7 +30,7 @@ The Couple Memories wall can use a Supabase project so photos are published with
 
    Confirm that one row was inserted. Additional moderators can be added the same way. Removing their row revokes moderation access.
 3. In the Vercel project's environment settings, add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` using the project's URL and publishable key (the legacy anon key also works). These two values are public browser credentials; **never use a service-role or secret key**. Set them for the environments you deploy, then redeploy: Next.js embeds public environment variables at build time.
-4. Open the site and select **Manage photos** in Couple Memories. Sign in with the moderator account to show the remove buttons. Removing a photo removes it from the shared wall for everyone.
+4. Open the site and select **Manage memories** in Wedding Memories. Sign in with the moderator account to show the remove buttons. Removing a memory removes it from the shared wall for everyone.
 
 Until both public settings are configured, the original device-only wall remains available and clearly says that photos are not shared. Photos previously saved in a guest's browser remain on that device and are shown separately after the shared wall is configured; they are never uploaded automatically.
 

@@ -10,7 +10,7 @@ const menuItems = [
   { href: "#gallery", label: "Photo gallery", icon: "gallery", x: -123, y: -48 },
   { href: "#venue", label: "Venue", icon: "pin", x: -132, y: 0 },
   { href: "#rsvp", label: "Show us some love", icon: "gift", x: -123, y: 48 },
-  { href: "#memories", label: "Couple memories", icon: "camera", x: -96, y: 90 },
+  { href: "#memories", label: "Wedding memories", icon: "camera", x: -96, y: 90 },
   { href: "#quiz", label: "Couple quiz", icon: "quiz", x: -57, y: 119 },
   { href: "#bingo", label: "Wedding bingo", icon: "bingo", x: -9, y: 132 },
 ];
@@ -109,13 +109,13 @@ export default function FloatingMenu({ visible }: { visible: boolean }) {
         <button
           className="floating-menu__backdrop"
           type="button"
-          aria-label="Close the wedding menu"
+          aria-label="Close the wedding contents"
           onClick={() => setIsOpen(false)}
         />
       )}
       <div className={`floating-menu${isOpen ? " floating-menu--open" : ""}`}>
         <nav
-          id="wedding-section-menu"
+          id="wedding-section-contents"
           className="floating-menu__items"
           aria-label="Wedding sections"
           aria-hidden={!isOpen}
@@ -141,10 +141,10 @@ export default function FloatingMenu({ visible }: { visible: boolean }) {
           className="floating-menu__toggle"
           type="button"
           aria-expanded={isOpen}
-          aria-controls="wedding-section-menu"
+          aria-controls="wedding-section-contents"
           onClick={() => setIsOpen((open) => !open)}
         >
-          {isOpen ? "CLOSE" : "MENU"}
+          {isOpen ? "CLOSE" : "CONTENTS"}
         </button>
       </div>
     </>

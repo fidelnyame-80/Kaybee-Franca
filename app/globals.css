@@ -677,8 +677,11 @@ a { color: inherit; text-decoration: none; }
 .couple-memories__card:nth-child(3n) { transform: rotate(-1.5deg); }
 .couple-memories__photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #e3c9c5; }
 .couple-memories__photo img { object-fit: cover; }
+.couple-memories__photo video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #2b1b20; }
 .couple-memories__card figcaption { padding: 2.5cqw .3cqw .5cqw; color: #6f4b43; font: 400 clamp(17px, 3.5cqw, 24px)/1.2 var(--script); text-align: center; }
-.couple-memories__card button {
+.couple-memories__download { display: inline-grid; min-height: 40px; place-items: center; padding: 3px 8px; border: 0; background: transparent; color: var(--burgundy); cursor: pointer; font: 600 11px/1.2 var(--sans); text-decoration: underline; text-underline-offset: 3px; }
+.couple-memories__download:disabled { opacity: .55; cursor: wait; }
+.couple-memories__remove {
   position: absolute;
   z-index: 3;
   top: 8px;
@@ -952,8 +955,8 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 8px 26px rgba(65, 12, 32, .27);
   color: #fff9ed;
   cursor: pointer;
-  font: 700 11px/1 var(--sans);
-  letter-spacing: .16em;
+  font: 700 10px/1 var(--sans);
+  letter-spacing: .1em;
   pointer-events: auto;
   transition: transform .25s ease, box-shadow .25s ease;
 }
