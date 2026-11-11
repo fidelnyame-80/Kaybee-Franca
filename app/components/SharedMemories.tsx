@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
-import ScrollReveal from "./ScrollReveal";
 import MemoryModerator from "./MemoryModerator";
+import { WeddingWall, WeddingWallNote } from "./WeddingWall";
 import {
   deleteSharedMemory,
   downloadSharedMemory,
@@ -143,47 +143,31 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
 
   return (
     <section className="couple-memories" id="memories" aria-labelledby="memories-heading">
-      <ScrollReveal className="couple-memories__intro">
-        <p className="section-kicker">MADE MORE SPECIAL BY YOU</p>
-        <h2 id="memories-heading">Wedding <em>memories</em></h2>
-        <p>Captured a moment from our wedding? Share the photos and short videos our camera team might miss, and come back to relive and download them.</p>
-      </ScrollReveal>
-      <ScrollReveal delay={0.1}>
-        <label className="couple-memories__upload">
-          <input type="file" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/quicktime,video/webm" multiple disabled={isUploading || isLoading || loadFailed} onChange={(event) => void handleUpload(event)} />
-          <span aria-hidden="true">＋</span>
-          {isUploading ? "ADDING MEMORIES…" : "ADD PHOTOS & VIDEOS"}
-        </label>
-      </ScrollReveal>
-      <p className="couple-memories__privacy">Photos and videos you add can be seen and downloaded by everyone visiting this site. Photos can be up to 15 MB and videos up to 50 MB each.</p>
+      <WeddingWallNote shared accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/quicktime,video/webm" disabled={isUploading || isLoading || loadFailed} isUploading={isUploading} onUpload={(event) => void handleUpload(event)} />
       <p className="couple-memories__status" role="status" aria-live="polite">
         {isLoading ? "Loading shared memories…" : loadFailed ? "The shared wall could not be loaded." : status}
       </p>
       {loadFailed && <button className="memory-moderator__action" type="button" onClick={() => void retry()}>Try again</button>}
-      {!isLoading && !loadFailed && memories.length === 0 ? (
-        <div className="couple-memories__empty"><span aria-hidden="true">♡</span><p>Your wedding moments will find a place here.</p></div>
-      ) : (
-        <div className="couple-memories__gallery">
-          {memories.map((memory, index) => (
-            <figure className="couple-memories__card" key={memory.path}>
-              <div className="couple-memories__photo">
-                {memory.kind === "video" ? (
-                  <video src={memory.url} controls playsInline preload="metadata" aria-label={`Wedding video ${index + 1}`} />
-                ) : (
-                  <Image src={memory.url} alt={`A guest's wedding photo ${index + 1}`} fill sizes="(max-width: 900px) 44vw, 230px" unoptimized />
-                )}
-              </div>
-              <figcaption>A moment to keep</figcaption>
-              <button className="couple-memories__download" type="button" disabled={downloading !== null} onClick={() => void download(memory)} aria-label={`Download ${memory.kind} ${index + 1}`}>
-                {downloading === memory.path ? "Preparing…" : "Download"}
-              </button>
-              {isModerator && (
-                <button className="couple-memories__remove" type="button" aria-label={`Remove ${memory.kind} ${index + 1}`} onClick={() => void remove(memory)}>×</button>
+      <WeddingWall>
+        {memories.map((memory, index) => (
+          <figure className="couple-memories__card" key={memory.path}>
+            <div className="couple-memories__photo">
+              {memory.kind === "video" ? (
+                <video src={memory.url} controls playsInline preload="metadata" aria-label={`Wedding video ${index + 1}`} />
+              ) : (
+                <Image src={memory.url} alt={`A guest's wedding photo ${index + 1}`} fill sizes="(max-width: 900px) 44vw, 230px" unoptimized />
               )}
-            </figure>
-          ))}
-        </div>
-      )}
+            </div>
+            <figcaption>A moment to keep</figcaption>
+            <button className="couple-memories__download" type="button" disabled={downloading !== null} onClick={() => void download(memory)} aria-label={`Download ${memory.kind} ${index + 1}`}>
+              {downloading === memory.path ? "Preparing…" : "Download"}
+            </button>
+            {isModerator && (
+              <button className="couple-memories__remove" type="button" aria-label={`Remove ${memory.kind} ${index + 1}`} onClick={() => void remove(memory)}>×</button>
+            )}
+          </figure>
+        ))}
+      </WeddingWall>
       <MemoryModerator onAccessChange={setIsModerator} />
       {savedOnDevice}
     </section>

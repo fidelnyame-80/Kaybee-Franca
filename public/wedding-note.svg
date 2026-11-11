@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fffdf7"/>
+      <stop offset="0.55" stop-color="#fffaf0"/>
+      <stop offset="1" stop-color="#f7ebdb"/>
+    </linearGradient>
+  </defs>
+  <path d="M8 8 43 6 72 8 102 5 131 7 160 5 192 7 220 5 250 7 280 5 310 7 340 5 371 8 392 7 390 56 393 104 391 155 393 205 391 255 393 305 391 355 393 405 391 455 393 505 390 554 392 591 367 592 342 589 319 594 295 590 272 594 249 590 224 595 202 591 179 595 155 590 132 594 108 590 84 594 60 590 36 594 8 591 10 550 7 500 9 450 7 400 9 350 7 300 9 250 7 200 9 150 7 100 9 50Z" fill="url(#paper)" stroke="#e4d1bc" stroke-width="1"/>
+  <path d="M25 34h44M329 564h42M36 507h19M340 104h25" stroke="#d5bd9f" stroke-width="1" opacity=".3"/>
+  <g fill="#d8bea6" opacity=".27">
+    <circle cx="28" cy="150" r="1"/><circle cx="373" cy="230" r="1"/><circle cx="38" cy="332" r=".8"/>
+    <circle cx="366" cy="420" r=".8"/><circle cx="53" cy="555" r="1"/><circle cx="349" cy="45" r=".8"/>
+  </g>
+</svg>

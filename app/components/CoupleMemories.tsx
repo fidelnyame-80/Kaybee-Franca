@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
-import ScrollReveal from "./ScrollReveal";
+import { WeddingWall, WeddingWallNote } from "./WeddingWall";
 import {
   deleteMemory,
   getSavedMemories,
@@ -172,80 +172,35 @@ function LocalMemories({ archived = false }: { archived?: boolean }) {
 
   if (archived && (isLoading || memories.length === 0)) return null;
 
-  const content = (
-    <>
-      {archived ? (
-        <h3 className="couple-memories__saved-heading">Photos saved on this device</h3>
-      ) : <ScrollReveal className="couple-memories__intro">
-        <p className="section-kicker">MADE MORE SPECIAL BY YOU</p>
-        <h2 id="memories-heading">Wedding <em>memories</em></h2>
-        <p>Captured a moment from our wedding? We would love to see the photos and videos our camera team might miss.</p>
-      </ScrollReveal>}
-      {!archived && <ScrollReveal delay={0.1}>
-        <label className="couple-memories__upload">
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          disabled={isUploading}
-          onChange={handleUpload}
-        />
-        <span aria-hidden="true">＋</span>
-        {isUploading ? "ADDING PHOTOS…" : "ADD YOUR PHOTOS"}
-        </label>
-      </ScrollReveal>}
-      <p className="couple-memories__privacy">
-        {archived
-          ? "These previously saved photos are private to this browser and device."
-          : "Sharing isn't ready yet. For now, only photos can be saved in this browser on this device."}
-      </p>
-      <p className="couple-memories__status" role="status" aria-live="polite">
-        {isLoading ? "Loading your saved photos…" : status}
-      </p>
-      {!isLoading && memories.length === 0 ? (
-        <div className="couple-memories__empty" aria-live="polite">
-          <span aria-hidden="true">♡</span>
-          <p>Your photos will find a place here.</p>
-        </div>
-      ) : (
-        <div ref={galleryRef} className="couple-memories__gallery">
-          {memories.map((memory, index) => (
-            <figure className="couple-memories__card" key={memory.id}>
-              <div className="couple-memories__photo">
-                <Image
-                  src={memory.preview}
-                  alt={`A guest memory of Kaybee and Franca, photo ${index + 1}`}
-                  fill
-                  sizes="(max-width: 900px) 44vw, 230px"
-                  unoptimized
-                />
-              </div>
-              <figcaption>A moment to keep</figcaption>
-              <a
-                className="couple-memories__download"
-                href={memory.preview}
-                download={`wedding-memory-${index + 1}.${(memory.image.type.split("/")[1] || "jpg").replace(/[^a-z0-9]/gi, "")}`}
-              >
-                Download
-              </a>
-              <button
-                type="button"
-                className="couple-memories__remove"
-                aria-label={`Remove photo ${index + 1}`}
-                onClick={() => void removeMemory(memory.id)}
-              >
-                ×
-              </button>
-            </figure>
-          ))}
-        </div>
-      )}
-    </>
-  );
+  const cards = memories.map((memory, index) => (
+    <figure className="couple-memories__card" key={memory.id}>
+      <div className="couple-memories__photo">
+        <Image src={memory.preview} alt={`A guest memory of Kaybee and Franca, photo ${index + 1}`} fill sizes="(max-width: 900px) 44vw, 230px" unoptimized />
+      </div>
+      <figcaption>A moment to keep</figcaption>
+      <a className="couple-memories__download" href={memory.preview} download={`wedding-memory-${index + 1}.${(memory.image.type.split("/")[1] || "jpg").replace(/[^a-z0-9]/gi, "")}`}>
+        Download
+      </a>
+      <button type="button" className="couple-memories__remove" aria-label={`Remove photo ${index + 1}`} onClick={() => void removeMemory(memory.id)}>×</button>
+    </figure>
+  ));
 
-  return archived ? (
-    <div className="couple-memories__saved">{content}</div>
-  ) : (
-    <section className="couple-memories" id="memories" aria-labelledby="memories-heading">{content}</section>
+  if (archived) {
+    return (
+      <div className="couple-memories__saved">
+        <h3 className="couple-memories__saved-heading">Photos saved on this device</h3>
+        <p className="couple-memories__privacy">These previously saved photos are private to this browser and device.</p>
+        <p className="couple-memories__status" role="status" aria-live="polite">{status}</p>
+        <div ref={galleryRef} className="couple-memories__gallery">{cards}</div>
+      </div>
+    );
+  }
+
+  return (
+    <section className="couple-memories" id="memories" aria-labelledby="memories-heading">
+      <WeddingWallNote shared={false} accept="image/*" disabled={isUploading || isLoading} isUploading={isUploading} onUpload={handleUpload} />
+      <p className="couple-memories__status" role="status" aria-live="polite">{isLoading ? "Loading your saved photos…" : status}</p>
+      <WeddingWall galleryRef={galleryRef}>{cards}</WeddingWall>
+    </section>
   );
 }
