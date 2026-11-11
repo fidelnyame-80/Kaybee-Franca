@@ -698,6 +698,11 @@ a { color: inherit; text-decoration: none; }
 .wedding-wall__note-rule { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 4cqw auto; color: #b77d7d; font: 23px/1 var(--serif); }
 .wedding-wall__note-rule::before, .wedding-wall__note-rule::after { width: 38px; height: 1px; background: #dbc4b3; content: ""; }
 .wedding-wall__note-copy { max-width: 330px; margin: 0 auto; color: #60484a; font: italic 500 clamp(18px, 4.2cqw, 24px)/1.35 var(--serif); }
+.wedding-wall__note-photos { display: flex; align-items: center; justify-content: center; gap: clamp(18px, 5cqw, 32px); margin: 7cqw auto 0; }
+.wedding-wall__note-photo { flex: 0 1 120px; width: min(28cqw, 120px); margin: 0; padding: 5px 5px 13px; background: #fffefa; box-shadow: 0 5px 12px rgba(61, 29, 22, .18); transform: rotate(-4deg); }
+.wedding-wall__note-photo:nth-child(2) { transform: rotate(4deg) translateY(5px); }
+.wedding-wall__note-photo > div { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #ead5c8; }
+.wedding-wall__note-photo img { object-fit: cover; }
 .wedding-wall__actions { display: grid; gap: 10px; max-width: 300px; margin: 6cqw auto 0; }
 .wedding-wall__view, .wedding-wall__actions .wedding-wall__add {
   display: flex;
