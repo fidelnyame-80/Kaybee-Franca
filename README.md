@@ -13,7 +13,7 @@ Open http://localhost:3000. Build the static site with `bun run build`.
 
 ## Add the photos and details
 
-Put site photos in `public/`, then update the paths and descriptions in [`app/site-content.ts`](app/site-content.ts). The couple's story photos are in `public/history/`; add entries in chronological order to `storyPhotos`, using `{ src: "/history/2016.jpg", alt: "Description of the photo", year: "2016" }`. An optional `objectPosition` can adjust the crop in the album.
+Put site photos in `public/`, then update the paths and descriptions in [`app/site-content.ts`](app/site-content.ts). The pre-wedding album and carousel use `couplePhotos`. The couple's story photos are in `public/history/`; add entries in chronological order to `storyPhotos`, using `{ src: "/history/2016.jpg", alt: "Description of the photo", year: "2016" }`. An optional `objectPosition` can adjust the crop in the album.
 
 ## Shared wedding memories and moderation
 
