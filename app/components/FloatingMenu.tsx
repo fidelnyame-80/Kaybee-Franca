@@ -7,7 +7,7 @@ const menuItems = [
   { href: "#top", label: "Home", icon: "home", x: -9, y: -132 },
   { href: "#our-day", label: "Our day", icon: "calendar", x: -57, y: -119 },
   { href: "#moments", label: "Our story", icon: "heart", x: -96, y: -90 },
-  { href: "#gallery", label: "Photo gallery", icon: "gallery", x: -123, y: -48 },
+  { href: "#gallery", label: "Our history", icon: "gallery", x: -123, y: -48 },
   { href: "#venue", label: "Venue", icon: "pin", x: -132, y: 0 },
   { href: "#rsvp", label: "Show us some love", icon: "gift", x: -123, y: 48 },
   { href: "#memories", label: "Wedding memories", icon: "camera", x: -96, y: 90 },

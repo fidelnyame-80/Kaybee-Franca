@@ -92,8 +92,8 @@ export default function Home() {
 
         <section className="photo-gallery" id="gallery" aria-labelledby="gallery-heading">
           <ScrollReveal className="photo-gallery__intro">
-            <p className="section-kicker">THE PHOTO GALLERY</p>
-            <h2 id="gallery-heading">Little pieces of <em>forever</em></h2>
+            <p className="section-kicker">OUR HISTORY</p>
+            <h2 id="gallery-heading">A decade of <em>us</em></h2>
             <p>Our favourite moments, gathered in one place.</p>
           </ScrollReveal>
           <ScrollReveal><PhotoGallery /></ScrollReveal>

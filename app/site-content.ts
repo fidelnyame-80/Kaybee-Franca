@@ -34,7 +34,15 @@ export const couplePhotos = [
   { src: "/image9.webp", alt: "A cherished moment from Kaybee and Franca's story" },
 ];
 
-export const preWeddingPhotos = couplePhotos;
-
-// Add older photos here using the same { src, alt } format as couplePhotos.
-export const historyPhotos: typeof couplePhotos = [];
+// The couple's story, in chronological order.
+export const storyPhotos: { src: string; alt: string; year: string; objectPosition?: string }[] = [
+  { year: "2016", src: "/history/2016.jpg", alt: "Side-by-side portraits of Kaybee and Franca in 2016", objectPosition: "50% 0%" },
+  { year: "2017", src: "/history/2017.jpg", alt: "Kaybee and Franca smiling in a black-and-white selfie in 2017", objectPosition: "0% 50%" },
+  { year: "2018", src: "/history/2018.jpg", alt: "Kaybee and Franca smiling outdoors in 2018" },
+  { year: "2019", src: "/history/2019.jpg", alt: "Kaybee and Franca with a loved one in 2019" },
+  { year: "2020", src: "/history/2020.jpg", alt: "Kaybee and Franca together at a table in 2020" },
+  { year: "2021", src: "/history/2021.jpg", alt: "Kaybee and Franca in a group photo in 2021", objectPosition: "50% 25%" },
+  { year: "2022", src: "/history/2022.jpg", alt: "Kaybee and Franca beside a birthday cake in 2022" },
+  { year: "2023", src: "/history/2023.jpg", alt: "Kaybee and Franca smiling together in 2023", objectPosition: "55% 50%" },
+  { year: "2024", src: "/history/2024.jpg", alt: "Kaybee and Franca dressed up together outdoors in 2024" },
+];
