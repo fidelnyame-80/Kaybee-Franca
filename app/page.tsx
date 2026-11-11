@@ -10,6 +10,7 @@ import VenueDirections from "./components/VenueDirections";
 import GiftDetails from "./components/GiftDetails";
 import ScrollReveal from "./components/ScrollReveal";
 import DecorativeVines, { InvitationFlorals } from "./components/DecorativeVines";
+import WeddingLoader from "./components/WeddingLoader";
 import { photos, wedding } from "./site-content";
 
 type PhotoSlotProps = {
@@ -31,6 +32,7 @@ function PhotoSlot({ src, label, className }: PhotoSlotProps) {
 
 export default function Home() {
   return (
+    <WeddingLoader>
     <div className="site-shell" id="top">
       <DecorativeVines />
       <main>
@@ -181,5 +183,6 @@ export default function Home() {
         <a href="#top" aria-label="Back to top">↑</a>
       </footer>
     </div>
+    </WeddingLoader>
   );
 }

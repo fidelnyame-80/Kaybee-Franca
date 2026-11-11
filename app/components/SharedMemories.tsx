@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import MemoryModerator from "./MemoryModerator";
-import { WeddingWall, WeddingWallNote } from "./WeddingWall";
+import { WeddingWall, WeddingWallPageIntro } from "./WeddingWall";
 import {
   deleteSharedMemory,
   downloadSharedMemory,
@@ -142,8 +142,8 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
   };
 
   return (
-    <section className="couple-memories" id="memories" aria-labelledby="memories-heading">
-      <WeddingWallNote shared accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/quicktime,video/webm" disabled={isUploading || isLoading || loadFailed} isUploading={isUploading} onUpload={(event) => void handleUpload(event)} />
+    <section className="couple-memories wedding-wall-page__content" aria-labelledby="wedding-wall-page-heading">
+      <WeddingWallPageIntro shared accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/quicktime,video/webm" disabled={isUploading || isLoading || loadFailed} isUploading={isUploading} onUpload={(event) => void handleUpload(event)} />
       <p className="couple-memories__status" role="status" aria-live="polite">
         {isLoading ? "Loading shared memories…" : loadFailed ? "The shared wall could not be loaded." : status}
       </p>

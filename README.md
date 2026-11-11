@@ -30,7 +30,7 @@ The Wedding Memories wall can use a Supabase project so guest photos and short v
 
    Confirm that one row was inserted. Additional moderators can be added the same way. Removing their row revokes moderation access.
 3. In the Vercel project's environment settings, add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` using the project's URL and publishable key (the legacy anon key also works). These two values are public browser credentials; **never use a service-role or secret key**. Set them for the environments you deploy, then redeploy: Next.js embeds public environment variables at build time.
-4. Open the site and select **Manage memories** in Wedding Memories. Sign in with the moderator account to show the remove buttons. Removing a memory removes it from the shared wall for everyone.
+4. Open the Wedding Wall from the home page and select **Manage memories**. Sign in with the moderator account to show the remove buttons. Removing a memory removes it from the shared wall for everyone.
 
 Until both public settings are configured, the original device-only wall remains available and clearly says that photos are not shared. Photos previously saved in a guest's browser remain on that device and are shown separately after the shared wall is configured; they are never uploaded automatically.
 

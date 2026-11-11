@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import WeddingLoader from "./components/WeddingLoader";
 import { photos } from "./site-content";
 import "./globals.css";
 
@@ -30,7 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body>
-        <WeddingLoader>{children}</WeddingLoader>
+        {children}
       </body>
     </html>
   );
