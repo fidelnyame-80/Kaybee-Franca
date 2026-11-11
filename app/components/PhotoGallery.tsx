@@ -1,99 +1,87 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { historyPhotos, preWeddingPhotos } from "../site-content";
-
-type Photo = { src: string; alt: string };
-type Selection = { photos: Photo[]; index: number };
+import { Fragment, useEffect, useRef, useState } from "react";
+import { storyPhotos } from "../site-content";
 
 export default function PhotoGallery() {
-  const [selection, setSelection] = useState<Selection | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    if (selection && dialog && !dialog.open) dialog.showModal();
-  }, [selection]);
+    if (selectedIndex !== null && dialog && !dialog.open) dialog.showModal();
+  }, [selectedIndex]);
 
   const move = (direction: number) => {
-    setSelection((current) => current && {
-      ...current,
-      index: (current.index + direction + current.photos.length) % current.photos.length,
-    });
+    setSelectedIndex((current) => current === null
+      ? null
+      : (current + direction + storyPhotos.length) % storyPhotos.length);
   };
 
-  const prints = (photos: Photo[]) => photos.map((photo, index) => (
-    <figure className="photo-gallery__item" key={photo.src}>
-      <button
-        className="photo-gallery__photo"
-        type="button"
-        aria-label={`View photo: ${photo.alt}`}
-        onClick={() => setSelection({ photos, index })}
-      >
-        <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 720px) 42vw, 270px" unoptimized />
-      </button>
-      <figcaption><span>{String(index + 1).padStart(2, "0")}</span> Kaybee &amp; Franca</figcaption>
-    </figure>
-  ));
+  // Keep the central message in the same position while photos are being added.
+  const slots = Array.from({ length: Math.max(8, storyPhotos.length) }, (_, index) => storyPhotos[index]);
 
   return (
-    <div className="photo-gallery__chapters">
-      <section className="photo-gallery__chapter" aria-labelledby="pre-wedding-heading">
-        <div className="photo-gallery__chapter-heading">
-          <span className="photo-gallery__chapter-number">01</span>
-          <div>
-            <p>THE DAYS BEFORE FOREVER</p>
-            <h3 id="pre-wedding-heading">Pre-wedding <em>Photoshoot</em></h3>
-          </div>
-        </div>
-        <div className="photo-gallery__grid">{prints(preWeddingPhotos)}</div>
-      </section>
-
-      <section className="photo-gallery__chapter photo-gallery__chapter--history" aria-labelledby="history-heading">
-        <div className="photo-gallery__chapter-heading">
-          <span className="photo-gallery__chapter-number">02</span>
-          <div>
-            <p>THE STORY THAT BROUGHT US HERE</p>
-            <h3 id="history-heading">Our <em>History</em></h3>
-          </div>
-        </div>
-        <div className="photo-gallery__grid">
-          {historyPhotos.length ? prints(historyPhotos) : (
-            <>
-              <figure className="photo-gallery__item photo-gallery__item--placeholder">
-                <div className="photo-gallery__empty" aria-hidden="true"><span>♡</span></div>
-                <figcaption>Our story</figcaption>
+    <div className="story-album">
+      <div className="story-album__grid">
+        {slots.map((photo, index) => (
+          <Fragment key={photo ? `${photo.year}-${photo.src}` : `empty-${index}`}>
+            {index === 4 && (
+              <div className="story-album__message">
+                <h3><span className="story-album__message-line">10 Years of</span>Friendship <span>&amp; Loyalty</span></h3>
+                <p className="story-album__signature">Kaybee &amp; Franca</p>
+              </div>
+            )}
+            {photo ? (
+              <figure className="story-album__print">
+                <button
+                  className="story-album__photo"
+                  type="button"
+                  aria-label={`View ${photo.year} photo: ${photo.alt}`}
+                  onClick={() => setSelectedIndex(index)}
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(max-width: 720px) 28vw, 190px"
+                    style={{ objectPosition: photo.objectPosition ?? "center" }}
+                    unoptimized
+                  />
+                </button>
+                <figcaption>{photo.year}</figcaption>
               </figure>
-              <figure className="photo-gallery__item photo-gallery__item--placeholder">
-                <div className="photo-gallery__empty" aria-hidden="true"><span>♡</span></div>
-                <figcaption>More memories to come</figcaption>
+            ) : (
+              <figure className="story-album__print story-album__print--empty" aria-hidden="true">
+                <div className="story-album__empty"><span>♡</span></div>
+                <figcaption>&nbsp;</figcaption>
               </figure>
-            </>
-          )}
-        </div>
-      </section>
+            )}
+          </Fragment>
+        ))}
+      </div>
 
       <dialog
         className="gallery-viewer"
         ref={dialogRef}
         aria-label="Photo viewer"
-        onClose={() => setSelection(null)}
+        onClose={() => setSelectedIndex(null)}
         onClick={(event) => { if (event.target === event.currentTarget) event.currentTarget.close(); }}
         onKeyDown={(event) => {
           if (event.key === "ArrowLeft") move(-1);
           if (event.key === "ArrowRight") move(1);
         }}
       >
-        {selection && (
+        {selectedIndex !== null && storyPhotos[selectedIndex] && (
           <div className="gallery-viewer__content">
             <button className="gallery-viewer__close" type="button" aria-label="Close photo viewer" onClick={() => dialogRef.current?.close()}>×</button>
             <div className="gallery-viewer__image">
-              <Image src={selection.photos[selection.index].src} alt={selection.photos[selection.index].alt} fill sizes="(max-width: 720px) 90vw, 650px" unoptimized />
+              <Image src={storyPhotos[selectedIndex].src} alt={storyPhotos[selectedIndex].alt} fill sizes="(max-width: 720px) 90vw, 650px" unoptimized />
             </div>
             <div className="gallery-viewer__controls">
               <button type="button" onClick={() => move(-1)} aria-label="Previous photo">←</button>
-              <span>{selection.index + 1} / {selection.photos.length}</span>
+              <span>{selectedIndex + 1} / {storyPhotos.length}</span>
               <button type="button" onClick={() => move(1)} aria-label="Next photo">→</button>
             </div>
           </div>

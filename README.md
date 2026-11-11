@@ -13,7 +13,7 @@ Open http://localhost:3000. Build the static site with `bun run build`.
 
 ## Add the photos and details
 
-Put site photos in `public/`, then update the paths and descriptions in [`app/site-content.ts`](app/site-content.ts). The pre-wedding gallery uses `preWeddingPhotos`; add older photos to the `historyPhotos` array to replace its placeholders. Each entry uses `{ src: "/photo.webp", alt: "Description of the photo" }`.
+Put site photos in `public/`, then update the paths and descriptions in [`app/site-content.ts`](app/site-content.ts). Add the couple's story photos in chronological order to `storyPhotos`, using entries such as `{ src: "/story/2016.webp", alt: "Description of the photo", year: "2016" }`. An optional `objectPosition` can adjust the crop in the album.
 
 ## Shared guest photos and moderation
 

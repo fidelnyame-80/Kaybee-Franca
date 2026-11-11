@@ -34,7 +34,5 @@ export const couplePhotos = [
   { src: "/image9.webp", alt: "A cherished moment from Kaybee and Franca's story" },
 ];
 
-export const preWeddingPhotos = couplePhotos;
-
-// Add older photos here using the same { src, alt } format as couplePhotos.
-export const historyPhotos: typeof couplePhotos = [];
+// Add the couple's story photos in chronological order.
+export const storyPhotos: { src: string; alt: string; year: string; objectPosition?: string }[] = [];
