@@ -45,4 +45,5 @@ export const storyPhotos: { src: string; alt: string; year: string; objectPositi
   { year: "2022", src: "/history/2022.jpg", alt: "Kaybee and Franca beside a birthday cake in 2022" },
   { year: "2023", src: "/history/2023.jpg", alt: "Kaybee and Franca smiling together in 2023", objectPosition: "55% 50%" },
   { year: "2024", src: "/history/2024.jpg", alt: "Kaybee and Franca dressed up together outdoors in 2024" },
+  { year: "2025", src: "/history/2025.jpg", alt: "Kaybee and Franca smiling together on an evening out in 2025" },
 ];
