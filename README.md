@@ -15,7 +15,7 @@ Open http://localhost:3000. Build the static site with `bun run build`.
 
 Put site photos in `public/`, then update the paths and descriptions in [`app/site-content.ts`](app/site-content.ts). The pre-wedding album and carousel use `couplePhotos`. The couple's story photos are in `public/history/`; add entries in chronological order to `storyPhotos`, using `{ src: "/history/2016.jpg", alt: "Description of the photo", year: "2016" }`. An optional `objectPosition` can adjust the crop in the album.
 
-## Shared wedding memories and moderation
+## Previous Supabase wedding memories setup (legacy reference)
 
 The Wedding Memories wall can use a Supabase project so guest photos and short videos are published without approval and the open wall refreshes periodically. Guests can add JPG, PNG, WebP and GIF images up to 15 MB each, and MP4, MOV and WebM videos up to 50 MB each. Larger files use chunked uploads that retry interruptions. Visitors can view and download the memories. Only explicitly authorized moderator accounts can remove shared items. The Supabase storage policies enforce this even if someone alters the website in their browser.
 
@@ -39,3 +39,25 @@ The countdown targets the start of 14 November 2026 in GMT; the ceremony starts 
 The same file holds the wedding date, venue, and RSVP contacts. Venue directions request the visitor's location (with browser permission) and show a small embedded route map; visitors can also open the route in Google Maps.
 
 Quiz questions are in [`app/components/Quiz.tsx`](app/components/Quiz.tsx). They are playful guesses and have no right-answer scoring, since the couple's answers have not been supplied.
+
+## Cloudflare R2 wedding wall (new)
+
+The wedding wall now uses Cloudflare R2 for shared photos and videos. Configure the following **server-only** environment variables in Vercel: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`, `R2_PUBLIC_URL`. The public URL must be enabled on the bucket. Do not prefix secrets with `NEXT_PUBLIC_`.
+
+**Required R2 CORS policy**: In Cloudflare R2 → bucket → Settings → CORS, add this policy, replacing the origin with the deployed site URL (add custom-domain origin when applicable):
+
+```json
+[
+  {
+    "AllowedOrigins": ["https://kaybee-franca.vercel.app"],
+    "AllowedMethods": ["PUT", "GET", "HEAD"],
+    "AllowedHeaders": ["Content-Type"],
+    "ExposeHeaders": ["ETag"],
+    "MaxAgeSeconds": 3600
+  }
+]
+```
+
+Browser uploads use short-lived presigned PUT URLs. The server handles signing, listing, and moderator-authorized deletion. The existing Supabase moderator authentication and `wedding_moderators` table are **still required for deletion**, so retain `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` and the existing moderator setup. Public uploads do not require sign-in; consider anti-abuse/rate limiting before distributing widely. R2 media is distinct from previously uploaded Supabase media, which is not migrated automatically.
+
+After merging, install dependencies, verify a production build, redeploy, and test uploading an image and video from a guest browser, viewing from a second device, and deleting while signed in as a moderator. The R2 CORS policy must be active for browser uploads to work.
