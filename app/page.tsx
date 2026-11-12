@@ -128,9 +128,9 @@ export default function Home() {
             <PhotoSlot src={photos.rsvp} label="Kaybee and Franca portrait" className="portrait portrait--rsvp" />
           </div>
           <ScrollReveal><Reveal className="info-band__copy rsvp-band__copy">
-            <p className="section-kicker">A GIFT OF LOVE</p>
+            <p className="section-kicker">WITH LOVE & GRATITUDE</p>
             <h2 id="rsvp-heading">SHOW US SOME LOVE</h2>
-            <p className="section-intro">Your presence is the greatest gift. If you wish to bless us, you can find our details below.</p>
+            <p className="section-intro">Your presence is our greatest joy. For friends and family who would like to share a gift, we have included our details with love and gratitude.</p>
             <GiftDetails />
             <div className="rsvp-contacts">
               <p>RSVP OR WEDDING-DAY QUESTIONS</p>
