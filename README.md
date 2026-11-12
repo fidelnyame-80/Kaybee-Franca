@@ -61,3 +61,7 @@ The wedding wall now uses Cloudflare R2 for shared photos and videos. Configure 
 Browser uploads use short-lived presigned PUT URLs. The server handles signing, listing, and moderator-authorized deletion. The existing Supabase moderator authentication and `wedding_moderators` table are **still required for deletion**, so retain `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` and the existing moderator setup. Public uploads do not require sign-in; consider anti-abuse/rate limiting before distributing widely. R2 media is distinct from previously uploaded Supabase media, which is not migrated automatically.
 
 After merging, install dependencies, verify a production build, redeploy, and test uploading an image and video from a guest browser, viewing from a second device, and deleting while signed in as a moderator. The R2 CORS policy must be active for browser uploads to work.
+
+### Guest-owned deletion
+
+Each new R2 upload receives a private deletion token, stored only in the uploading browser's localStorage. The server stores only a SHA-256 hash of that token as an R2 object under `ownership/`. Guests can delete their own newly uploaded media from the same browser without an account; moderators can still delete any media. Clearing browser storage, switching devices or using private browsing may lose the ability to delete without moderator help. Older uploads created before this feature cannot be deleted by guests. Never expose the deletion token in the public gallery API.
