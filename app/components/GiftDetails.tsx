@@ -30,12 +30,14 @@ function CopyDetail({ value, label }: { value: string; label: string }) {
 export default function GiftDetails() {
   return (
     <div className="gift-details">
-      <article className="gift-details__card gift-details__card--bride" style={{ gridColumn: "1 / -1", border: "2px solid #9e1344", background: "linear-gradient(135deg, #fff4f5, #ffe2d6)", boxShadow: "0 12px 34px rgba(128, 0, 38, 0.14)", padding: "clamp(24px, 5vw, 42px)", textAlign: "center" }}>
-        <p className="gift-details__eyebrow">SEND LOVE TO THE BRIDE ♥</p>
-        <h3 style={{ fontFamily: "var(--display)", fontSize: "clamp(26px, 5vw, 42px)", margin: "12px 0" }}>Francisca Duodu</h3>
-        <p style={{ margin: "8px 0", fontFamily: "var(--sans)", letterSpacing: "0.12em", fontSize: "13px" }}>MTN MOBILE MONEY</p>
-        <p className="gift-details__number" style={{ fontSize: "clamp(27px, 6vw, 44px)", fontWeight: 700, margin: "12px 0 18px", overflowWrap: "anywhere" }}>055 613 6234</p>
-        <CopyDetail value="0556136234" label="BRIDE\u0027S MOMO NUMBER" />
+      <article className="gift-details__card gift-details__card--featured">
+        <p className="gift-details__eyebrow">A GIFT FROM THE HEART</p>
+        <h3>With love, for our new beginning</h3>
+        <p className="gift-details__message">For those who wish to celebrate with a gift, your kindness means so much to us. Thank you for being part of our story.</p>
+        <p className="gift-details__method">MTN Mobile Money</p>
+        <p className="gift-details__featured-number">055 613 6234</p>
+        <p className="gift-details__recipient">Francisca Duodu</p>
+        <CopyDetail value="0556136234" label="MOMO NUMBER" />
       </article>
       <article className="gift-details__card">
         <p className="gift-details__eyebrow">BANK DETAILS</p>
