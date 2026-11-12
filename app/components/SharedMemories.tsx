@@ -40,6 +40,7 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
       void getSharedMemories().then((photos) => {
         if (active && startedAt === revision.current && mutationsInFlight.current === 0) {
           setMemories(photos);
+          setOwnedPaths(photos.filter((photo) => ownsSharedMemory(photo.path)).map((photo) => photo.path));
           setLoadFailed(false);
         }
       }).catch(() => {
@@ -64,7 +65,9 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
     setIsLoading(true);
     setLoadFailed(false);
     try {
-      setMemories(await getSharedMemories());
+      const photos = await getSharedMemories();
+      setMemories(photos);
+      setOwnedPaths(photos.filter((photo) => ownsSharedMemory(photo.path)).map((photo) => photo.path));
     } catch {
       setLoadFailed(true);
     } finally {
@@ -166,7 +169,7 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
             <button className="couple-memories__download" type="button" disabled={downloading !== null} onClick={() => void download(memory)} aria-label={`Download ${memory.kind} ${index + 1}`}>
               {downloading === memory.path ? "Preparing…" : "Download"}
             </button>
-            {(isModerator || ownedPaths.includes(memory.path) || (typeof window !== "undefined" && ownsSharedMemory(memory.path))) && (
+            {(isModerator || ownedPaths.includes(memory.path)) && (
               <button className="couple-memories__remove" type="button" aria-label={`Remove ${memory.kind} ${index + 1}`} onClick={() => void remove(memory)}>×</button>
             )}
           </figure>
