@@ -31,9 +31,6 @@ export default function GiftDetails() {
   return (
     <div className="gift-details">
       <article className="gift-details__card gift-details__card--featured">
-        <p className="gift-details__eyebrow">A GIFT FROM THE HEART</p>
-        <h3>With love, for our new beginning</h3>
-        <p className="gift-details__message">For those who wish to celebrate with a gift, your kindness means so much to us. Thank you for being part of our story.</p>
         <p className="gift-details__method">MTN Mobile Money</p>
         <p className="gift-details__featured-number">055 613 6234</p>
         <p className="gift-details__recipient">Francisca Duodu</p>
