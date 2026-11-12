@@ -17,8 +17,8 @@ type MemoryPreview = SavedMemory & { preview: string };
 const MAX_FILE_SIZE = 15 * 1024 * 1024;
 const MAX_FILES_PER_UPLOAD = 10;
 
-export default function WeddingWallContent() {
-  return memoryClient ? <SharedMemories savedOnDevice={<LocalMemories archived />} /> : <LocalMemories />;
+export default function WeddingWallContent({ sharedEnabled }: { sharedEnabled: boolean }) {
+  return sharedEnabled ? <SharedMemories savedOnDevice={<LocalMemories archived />} /> : <LocalMemories />;
 }
 
 function LocalMemories({ archived = false }: { archived?: boolean }) {

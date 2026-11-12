@@ -12,6 +12,7 @@ import ScrollReveal from "./components/ScrollReveal";
 import DecorativeVines, { InvitationFlorals } from "./components/DecorativeVines";
 import WeddingLoader from "./components/WeddingLoader";
 import { photos, wedding } from "./site-content";
+import { configured } from "./lib/r2";
 
 type PhotoSlotProps = {
   src: string;
@@ -145,7 +146,7 @@ export default function Home() {
           </Reveal></ScrollReveal>
         </section>
 
-        <CoupleMemories />
+        <CoupleMemories sharedEnabled={configured()} />
 
         <section className="quiz-band" id="quiz" aria-labelledby="quiz-heading">
           <ScrollReveal><Reveal className="quiz-intro">

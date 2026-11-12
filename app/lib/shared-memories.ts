@@ -16,105 +16,36 @@ function createMemoryClient(): SupabaseClient | null {
 
 export const memoryClient = createMemoryClient();
 
-const BUCKET = "wedding-memories";
-const FOLDER = "uploads";
-const PAGE_SIZE = 100;
-const RESUMABLE_CHUNK_SIZE = 6 * 1024 * 1024;
-
-export type SharedMemory = {
-  path: string;
-  url: string;
-  kind: "photo" | "video";
-};
-
-function mediaKind(path: string): SharedMemory["kind"] {
-  return /\.(mp4|mov|webm)$/i.test(path) ? "video" : "photo";
-}
-
-function client(): SupabaseClient {
-  if (!memoryClient) throw new Error("The shared photo wall is not configured yet.");
-  return memoryClient;
-}
-
-export async function getSharedMemories(): Promise<SharedMemory[]> {
-  const storage = client().storage.from(BUCKET);
-  const memories: SharedMemory[] = [];
-  let offset = 0;
-
-  while (true) {
-    const { data, error } = await storage.list(FOLDER, {
-      limit: PAGE_SIZE,
-      offset,
-      sortBy: { column: "created_at", order: "desc" },
-    });
-    if (error) throw error;
-
-    for (const item of data) {
-      if (!item.id || item.name === ".emptyFolderPlaceholder") continue;
-      const path = `${FOLDER}/${item.name}`;
-      memories.push({ path, url: storage.getPublicUrl(path).data.publicUrl, kind: mediaKind(path) });
-    }
-
-    if (data.length < PAGE_SIZE) return memories;
-    offset += data.length;
-  }
-}
-
+export type SharedMemory = { path: string; url: string; kind: "photo" | "video" };
 const extensions: Record<string, string> = {
-  "image/jpeg": "jpg",
-  "image/png": "png",
-  "image/webp": "webp",
-  "image/gif": "gif",
-  "video/mp4": "mp4",
-  "video/quicktime": "mov",
-  "video/webm": "webm",
+  "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp",
+  "image/gif": "gif", "video/mp4": "mp4", "video/quicktime": "mov", "video/webm": "webm",
 };
-
-export function isSupportedMemory(file: File): boolean {
-  return Object.hasOwn(extensions, file.type);
+export function isSupportedMemory(file: File): boolean { return Object.hasOwn(extensions, file.type); }
+export async function getSharedMemories(): Promise<SharedMemory[]> {
+  const response = await fetch("/api/memories", { cache: "no-store" });
+  if (!response.ok) throw new Error("Could not load memories");
+  return response.json() as Promise<SharedMemory[]>;
 }
-
 export async function uploadSharedMemory(file: File, onProgress?: (percent: number) => void): Promise<SharedMemory> {
-  const extension = extensions[file.type];
-  if (!extension) throw new Error("Please choose a supported photo or video.");
-
-  const storage = client().storage.from(BUCKET);
-  const path = `${FOLDER}/${crypto.randomUUID()}.${extension}`;
-  if (file.size > RESUMABLE_CHUNK_SIZE) {
-    if (!supabaseUrl || !supabaseKey) throw new Error("The shared wall is not configured.");
-    const { Upload } = await import("tus-js-client");
-    const { data: { session }, error } = await client().auth.getSession();
-    if (error) throw error;
-    await new Promise<void>((resolve, reject) => {
-      const upload = new Upload(file, {
-        endpoint: `${supabaseUrl.replace(/\/$/, "")}/storage/v1/upload/resumable`,
-        retryDelays: [0, 1000, 3000, 5000],
-        headers: {
-          apikey: supabaseKey,
-          authorization: `Bearer ${session?.access_token ?? supabaseKey}`,
-          "x-upsert": "false",
-        },
-        uploadDataDuringCreation: true,
-        removeFingerprintOnSuccess: true,
-        chunkSize: RESUMABLE_CHUNK_SIZE,
-        metadata: { bucketName: BUCKET, objectName: path, contentType: file.type, cacheControl: "60" },
-        onProgress: (sent, total) => onProgress?.(Math.round((sent / total) * 100)),
-        onError: reject,
-        onSuccess: () => resolve(),
-      });
-      upload.start();
-    });
-  } else {
-    const { error } = await storage.upload(path, file, {
-      contentType: file.type,
-      cacheControl: "60",
-      upsert: false,
-    });
-    if (error) throw error;
-  }
-  return { path, url: storage.getPublicUrl(path).data.publicUrl, kind: mediaKind(path) };
+  if (!isSupportedMemory(file)) throw new Error("Unsupported file type");
+  const prepared = await fetch("/api/memories/upload", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ type: file.type, size: file.size }),
+  });
+  if (!prepared.ok) throw new Error("Could not prepare upload");
+  const { path, url, uploadUrl } = await prepared.json() as { path: string; url: string; uploadUrl: string };
+  await new Promise<void>((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", uploadUrl);
+    xhr.setRequestHeader("Content-Type", file.type);
+    xhr.upload.onprogress = (event) => { if (event.lengthComputable) onProgress?.(Math.round(event.loaded / event.total * 100)); };
+    xhr.onload = () => xhr.status >= 200 && xhr.status < 300 ? resolve() : reject(new Error("Upload failed"));
+    xhr.onerror = () => reject(new Error("Upload failed. Check R2 CORS configuration."));
+    xhr.send(file);
+  });
+  return { path, url, kind: file.type.startsWith("video/") ? "video" : "photo" };
 }
-
 export async function downloadSharedMemory(memory: SharedMemory): Promise<void> {
   const response = await fetch(memory.url);
   if (!response.ok) throw new Error("Could not download this memory.");
@@ -129,7 +60,12 @@ export async function downloadSharedMemory(memory: SharedMemory): Promise<void> 
 }
 
 export async function deleteSharedMemory(path: string): Promise<void> {
-  const { data, error } = await client().storage.from(BUCKET).remove([path]);
-  if (error) throw error;
-  if (!data?.length) throw new Error("Photo was not removed.");
+  if (!memoryClient) throw new Error("Moderator sign-in is unavailable");
+  const { data: { session } } = await memoryClient.auth.getSession();
+  if (!session) throw new Error("Please sign in as a moderator");
+  const response = await fetch("/api/memories/delete", {
+    method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
+    body: JSON.stringify({ path }),
+  });
+  if (!response.ok) throw new Error("Could not remove memory");
 }

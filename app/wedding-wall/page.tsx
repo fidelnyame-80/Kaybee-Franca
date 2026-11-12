@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import WeddingWallContent from "../components/WeddingWallContent";
+import { configured } from "../lib/r2";
 
 export const metadata: Metadata = {
   title: "Wedding Wall | Kaybee & Franca",
@@ -18,7 +19,7 @@ export default function WeddingWallPage() {
         <Link href="/" className="wedding-wall-page__monogram" aria-label="Kaybee and Franca — go to home page">K <span>&amp;</span> F</Link>
       </header>
       <main>
-        <WeddingWallContent />
+        <WeddingWallContent sharedEnabled={configured()} />
       </main>
       <footer className="wedding-wall-page__footer">
         <p>With love, Kaybee &amp; Franca</p>
