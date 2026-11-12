@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!token || !url || !key) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const auth = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+  const auth = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false }, global: { headers: { Authorization: `Bearer ${token}` } } });
   const { data: { user }, error } = await auth.auth.getUser(token);
   if (error || !user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { data: moderator, error: roleError } = await auth.from("wedding_moderators").select("user_id").eq("user_id", user.id).maybeSingle();
