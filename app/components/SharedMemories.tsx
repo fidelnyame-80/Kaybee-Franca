@@ -9,6 +9,7 @@ import {
   downloadSharedMemory,
   getSharedMemories,
   isSupportedMemory,
+  ownsSharedMemory,
   uploadSharedMemory,
   type SharedMemory,
 } from "../lib/shared-memories";
@@ -23,6 +24,7 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
   const [isUploading, setIsUploading] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
+  const [ownedPaths, setOwnedPaths] = useState<string[]>([]);
   const [downloading, setDownloading] = useState<string | null>(null);
   const [status, setStatus] = useState("");
   const revision = useRef(0);
@@ -38,6 +40,7 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
       void getSharedMemories().then((photos) => {
         if (active && startedAt === revision.current && mutationsInFlight.current === 0) {
           setMemories(photos);
+          setOwnedPaths(photos.filter((photo) => ownsSharedMemory(photo.path)).map((photo) => photo.path));
           setLoadFailed(false);
         }
       }).catch(() => {
@@ -62,7 +65,9 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
     setIsLoading(true);
     setLoadFailed(false);
     try {
-      setMemories(await getSharedMemories());
+      const photos = await getSharedMemories();
+      setMemories(photos);
+      setOwnedPaths(photos.filter((photo) => ownsSharedMemory(photo.path)).map((photo) => photo.path));
     } catch {
       setLoadFailed(true);
     } finally {
@@ -99,6 +104,7 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
           setStatus(`Adding memory ${index + 1} of ${files.length}… ${percent}%`);
         });
         setMemories((current) => [photo, ...current]);
+        setOwnedPaths((current) => [...current, photo.path]);
         added += 1;
       } catch {
         // Keep successful uploads visible even if another upload fails.
@@ -133,9 +139,10 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
     try {
       await deleteSharedMemory(memory.path);
       setMemories((current) => current.filter((item) => item.path !== memory.path));
+      setOwnedPaths((current) => current.filter((path) => path !== memory.path));
       setStatus("Memory removed from the shared wall.");
     } catch {
-      setStatus("Could not remove this memory. Check your sign-in and try again.");
+      setStatus("Could not remove this memory. Please try again.");
     } finally {
       mutationsInFlight.current -= 1;
     }
@@ -162,7 +169,7 @@ export default function SharedMemories({ savedOnDevice }: { savedOnDevice: React
             <button className="couple-memories__download" type="button" disabled={downloading !== null} onClick={() => void download(memory)} aria-label={`Download ${memory.kind} ${index + 1}`}>
               {downloading === memory.path ? "Preparing…" : "Download"}
             </button>
-            {isModerator && (
+            {(isModerator || ownedPaths.includes(memory.path)) && (
               <button className="couple-memories__remove" type="button" aria-label={`Remove ${memory.kind} ${index + 1}`} onClick={() => void remove(memory)}>×</button>
             )}
           </figure>

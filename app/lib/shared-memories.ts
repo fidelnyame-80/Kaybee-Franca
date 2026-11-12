@@ -16,6 +16,11 @@ function createMemoryClient(): SupabaseClient | null {
 
 export const memoryClient = createMemoryClient();
 
+const OWNED_KEY = "kaybee-franca-owned-uploads";
+function ownedUploads(): Record<string, string> {
+  try { return JSON.parse(localStorage.getItem(OWNED_KEY) || "{}") as Record<string, string>; } catch { return {}; }
+}
+export function ownsSharedMemory(path: string): boolean { return Boolean(ownedUploads()[path]); }
 export type SharedMemory = { path: string; url: string; kind: "photo" | "video" };
 const extensions: Record<string, string> = {
   "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp",
@@ -34,7 +39,7 @@ export async function uploadSharedMemory(file: File, onProgress?: (percent: numb
     body: JSON.stringify({ type: file.type, size: file.size }),
   });
   if (!prepared.ok) throw new Error("Could not prepare upload");
-  const { path, url, uploadUrl } = await prepared.json() as { path: string; url: string; uploadUrl: string };
+  const { path, url, uploadUrl, deleteToken } = await prepared.json() as { path: string; url: string; uploadUrl: string; deleteToken: string };
   await new Promise<void>((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", uploadUrl);
@@ -44,6 +49,7 @@ export async function uploadSharedMemory(file: File, onProgress?: (percent: numb
     xhr.onerror = () => reject(new Error("Upload failed. Check R2 CORS configuration."));
     xhr.send(file);
   });
+  try { localStorage.setItem(OWNED_KEY, JSON.stringify({ ...ownedUploads(), [path]: deleteToken })); } catch { /* Private browsing may block local storage. */ }
   return { path, url, kind: file.type.startsWith("video/") ? "video" : "photo" };
 }
 export async function downloadSharedMemory(memory: SharedMemory): Promise<void> {
@@ -60,12 +66,19 @@ export async function downloadSharedMemory(memory: SharedMemory): Promise<void> 
 }
 
 export async function deleteSharedMemory(path: string): Promise<void> {
-  if (!memoryClient) throw new Error("Moderator sign-in is unavailable");
-  const { data: { session } } = await memoryClient.auth.getSession();
-  if (!session) throw new Error("Please sign in as a moderator");
+  const deleteToken = ownedUploads()[path];
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (!deleteToken && memoryClient) {
+    const { data: { session } } = await memoryClient.auth.getSession();
+    if (session) headers.Authorization = `Bearer ${session.access_token}`;
+  }
   const response = await fetch("/api/memories/delete", {
-    method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
-    body: JSON.stringify({ path }),
+    method: "POST", headers, body: JSON.stringify({ path, ...(deleteToken ? { deleteToken } : {}) }),
   });
   if (!response.ok) throw new Error("Could not remove memory");
+  if (deleteToken) {
+    const next = ownedUploads();
+    delete next[path];
+    try { localStorage.setItem(OWNED_KEY, JSON.stringify(next)); } catch { /* Ignore unavailable storage. */ }
+  }
 }
