@@ -130,7 +130,7 @@ export default function Home() {
           <ScrollReveal><Reveal className="info-band__copy rsvp-band__copy">
             <p className="section-kicker">WITH LOVE & GRATITUDE</p>
             <h2 id="rsvp-heading">SHOW US SOME LOVE</h2>
-            <p className="section-intro">Your presence is our greatest joy. For friends and family who would like to share a gift, we have included our details with love and gratitude.</p>
+            <p className="section-intro">Your presence means the world to us. If you wish to send a gift, our details are below.</p>
             <GiftDetails />
             <div className="rsvp-contacts">
               <p>RSVP OR WEDDING-DAY QUESTIONS</p>
