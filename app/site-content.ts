@@ -4,7 +4,7 @@ export const wedding = {
   dateDisplay: "Saturday, 14 November 2026",
   // Keep an explicit UTC offset so every guest counts down to the same instant.
   startsAt: "2026-11-14T10:00:00+00:00",
-  countdownTarget: "2026-11-14T00:00:00+00:00",
+  countdownTarget: "2026-11-14T10:00:00+00:00",
   timeDisplay: "10:00 AM GMT",
   venueName: "Anointed People Int.",
   venueDescription: "Foster Home, Adenta-Frafraha",
