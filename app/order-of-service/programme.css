@@ -34,3 +34,13 @@
 .programme__ceremony li{font-size:clamp(22px,3.3vw,29px)}
 .programme__number{font-size:clamp(16px,2vw,19px)}
 .programme__footer a{font-size:clamp(15px,2vw,18px)}
+
+/* Wedding hymn booklet */
+.programme__group-label{text-align:center;font:italic clamp(22px,3vw,29px)/1.3 var(--serif);color:#8e4660;margin:-20px auto 40px}
+.programme__section-title--hymns{margin-top:95px}
+.programme__hymn{max-width:650px;margin:0 auto 48px;padding:36px clamp(16px,4vw,42px);text-align:center;background:#fff3e9;border-top:2px solid #d9a4ae;border-bottom:2px solid #d9a4ae}
+.programme__hymn-kicker,.programme__hymn-chorus-label{font:700 clamp(16px,2.2vw,20px)/1.3 var(--sans);letter-spacing:.12em;color:#a34262;margin:0 0 12px}
+.programme__hymn h3{font:400 clamp(33px,5vw,51px)/1.15 var(--display);margin:0 0 30px}
+.programme__hymn-verse{font:400 clamp(23px,3.4vw,30px)/1.55 var(--serif);margin:0 auto 27px}
+.programme__hymn-chorus-label{margin-top:30px}
+.programme__hymn-note{font:italic clamp(22px,3vw,27px) var(--serif);margin:0}
