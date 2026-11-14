@@ -1,0 +1,47 @@
+export const officiatingMinisters = [
+  "Bishop Edwin Morgan Ogoe",
+  "ES Bridgette-Marian Emunah Ogoe",
+  "Bishop Stephen Harry Sawyerr",
+  "Bishop George Seneagya",
+  "Rev. Lester Baimbill-Johnson",
+  "Lady Rev Laurene Boateng",
+  "Pastor Benjamin Ahlijah",
+];
+export const groomsmen = [
+  "Derrick Atreku Kofi",
+  "Dr. Ayornu Felix",
+  "Joseph Clegg- Antwi",
+  "Evans Korletey",
+  "Andy Asare Dappah",
+  "Solomon Owusu",
+  "Bijou Hillel",
+  "Leonard Nii Odarty Mills",
+];
+export const bridesmaids = [
+  "Charlotte Ayesu",
+  "Akosua Birago Amaning",
+  "Humphrella Ohui Agbetor",
+  "Rhoda Nyame",
+  "Diane Ohene-Mensah",
+  "Princess Siale",
+  "Deborah Boye",
+  "Samantha Boateng",
+  "Maabena Ackon",
+];
+export const ceremony = [
+  "Musical interlude and Arrival of guests",
+  "Bridal Procession",
+  "Call to Worship",
+  "Nuptial Ceremony and exchange of rings",
+  "Solo/Song Ministration - LP Gloria Alornu (I Promise)",
+  "Holy Communion",
+  "Hymn 1 - Showers of Blessing",
+  "Signing of Register & Offertory",
+  "1st Scripture Reading - Stephanie Boateng (1 Cor 13:4-8)",
+  "2nd Scripture Reading - (Awo Ama Anokye-Bempah (1 Pet 3;1-5)",
+  "Sermon",
+  "The Charge",
+  "Hymn 2 - Great is Thy Faithfulness",
+  "Benediction",
+  "Bridal Recession",
+];
