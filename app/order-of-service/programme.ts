@@ -33,7 +33,7 @@ export const ceremony = [
   "Bridal Procession",
   "Call to Worship",
   "Nuptial Ceremony and exchange of rings",
-  "Solo/Song Ministration - LP Gloria Alornu (I Promise)",
+  "Solo/Song Ministration - LP Gloria Alornu (I Promise); Mavis Teye Adjesah (In His Time)",
   "Holy Communion",
   "Hymn 1 - Showers of Blessing",
   "Signing of Register & Offertory",
