@@ -84,3 +84,10 @@
 .programme__photography-list li{display:grid;grid-template-columns:36px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid #efddd5;font:400 clamp(19px,2.8vw,25px)/1.35 var(--serif)}
 .programme__photography-list li:last-child{border-bottom:0}
 .programme__photography-list li span:first-child{font:700 15px/1.7 var(--sans);color:#ae5872}
+
+/* Always-visible right-edge programme navigator; no menu toggle required. */
+.programme__side-nav{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:80;display:flex;flex-direction:column;gap:3px;padding:8px 6px 8px 8px;background:rgba(101,24,53,.96);border-radius:16px 0 0 16px;box-shadow:0 8px 28px rgba(55,9,28,.24);backdrop-filter:blur(10px)}
+.programme__side-nav a{display:flex;align-items:center;gap:8px;min-height:48px;padding:10px 12px;color:#fffaf2;text-decoration:none;border-radius:9px;font:600 clamp(12px,1.5vw,15px)/1.2 var(--sans);white-space:nowrap;transition:background .2s}
+.programme__side-nav a:hover,.programme__side-nav a:focus-visible{background:#a84569;outline-offset:2px}
+.programme__side-number{color:#f5c4d0;font:700 11px/1.2 var(--sans)}
+@media(max-width:600px){.programme__side-nav{gap:2px;padding:6px 3px 6px 5px;border-radius:12px 0 0 12px}.programme__side-nav a{gap:5px;min-height:44px;padding:8px 7px;font-size:11px}.programme__side-number{font-size:10px}}
