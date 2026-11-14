@@ -4,16 +4,22 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 const menuItems = [
-  { href: "#top", label: "Home", icon: "home", x: -9, y: -132 },
-  { href: "#our-day", label: "Our day", icon: "calendar", x: -57, y: -119 },
-  { href: "#moments", label: "Our story", icon: "heart", x: -96, y: -90 },
-  { href: "#gallery", label: "Photo gallery", icon: "gallery", x: -123, y: -48 },
-  { href: "#venue", label: "Venue", icon: "pin", x: -132, y: 0 },
-  { href: "#rsvp", label: "Show us some love", icon: "gift", x: -123, y: 48 },
-  { href: "#memories", label: "Wedding memories", icon: "camera", x: -96, y: 90 },
-  { href: "#quiz", label: "Couple quiz", icon: "quiz", x: -57, y: 119 },
-  { href: "#bingo", label: "Wedding bingo", icon: "bingo", x: -9, y: 132 },
-];
+  { href: "#top", label: "Home", icon: "home" },
+  { href: "#our-day", label: "Our day", icon: "calendar" },
+  { href: "#moments", label: "Our story", icon: "heart" },
+  { href: "/order-of-service", label: "Order of service", icon: "programme" },
+  { href: "#gallery", label: "Photo gallery", icon: "gallery" },
+  { href: "#venue", label: "Venue", icon: "pin" },
+  { href: "#rsvp", label: "Show us some love", icon: "gift" },
+  { href: "#memories", label: "Wedding memories", icon: "camera" },
+  { href: "#quiz", label: "Couple quiz", icon: "quiz" },
+  { href: "#bingo", label: "Wedding bingo", icon: "bingo" },
+].map((item, index, items) => ({
+  ...item,
+  // Give every icon and label its own row, including at the ends of the arc.
+  x: -120 * Math.sin((index / (items.length - 1)) * Math.PI),
+  y: (index - (items.length - 1) / 2) * 50,
+}));
 
 function MenuIcon({ name }: { name: string }) {
   const common = {
@@ -31,6 +37,8 @@ function MenuIcon({ name }: { name: string }) {
       return <svg viewBox="0 0 24 24" {...common}><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></svg>;
     case "heart":
       return <svg viewBox="0 0 24 24" {...common}><path d="M20.8 8.7c0 5.2-8.8 11-8.8 11s-8.8-5.8-8.8-11a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z" /></svg>;
+    case "programme":
+      return <svg viewBox="0 0 24 24" {...common}><path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7" /></svg>;
     case "gallery":
       return <svg viewBox="0 0 24 24" {...common}><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="m21 15-5-5L5 21" /></svg>;
     case "pin":
@@ -56,6 +64,7 @@ export default function FloatingMenu({ visible }: { visible: boolean }) {
       (item): item is HTMLAnchorElement => item !== null,
     );
     if (!elements.length) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     gsap.killTweensOf(elements);
     if (isOpen) {
@@ -68,8 +77,8 @@ export default function FloatingMenu({ visible }: { visible: boolean }) {
           autoAlpha: 1,
           scale: 1,
           rotate: 0,
-          duration: 0.55,
-          stagger: 0.045,
+          duration: reduceMotion ? 0 : 0.55,
+          stagger: reduceMotion ? 0 : 0.045,
           ease: "power3.out",
         },
       );
@@ -80,14 +89,14 @@ export default function FloatingMenu({ visible }: { visible: boolean }) {
         autoAlpha: 0,
         scale: 0.45,
         rotate: 12,
-        duration: 0.24,
-        stagger: { each: 0.018, from: "end" },
+        duration: reduceMotion ? 0 : 0.24,
+        stagger: { each: reduceMotion ? 0 : 0.018, from: "end" },
         ease: "power2.in",
       });
     }
 
     return () => gsap.killTweensOf(elements);
-  }, [isOpen]);
+  }, [isOpen, visible]);
 
   useEffect(() => {
     if (!isOpen) return;
