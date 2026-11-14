@@ -22,3 +22,15 @@
 .programme__number{font:600 11px var(--sans);color:#b55370;letter-spacing:.08em}
 .programme__footer{text-align:center;background:#6e1735;color:#fff2e5;padding:55px 20px 60px}.programme__footer p{font:400 44px var(--script);margin:0}.programme__footer span{display:block;font:400 29px var(--display);margin:10px 0 35px}.programme__footer a{display:inline-block;border:1px solid #f3c3be;padding:14px 22px;font:600 11px var(--sans);letter-spacing:.13em}
 @media(max-width:560px){.programme__hero{padding:35px 18px 55px}.programme__nav{padding:18px}.programme__party,.programme__columns{grid-template-columns:1fr;gap:26px}.programme__people li,.programme__party p{font-size:21px}.programme__section-title--ceremony{margin-top:55px}}
+
+/* Larger programme eyebrow labels, headings and supporting copy */
+.programme__nav{font-size:clamp(14px,2vw,17px)}
+.programme__eyebrow,.programme__date{font-size:clamp(18px,2.8vw,24px);line-height:1.35;letter-spacing:.13em}
+.programme__intro{font-size:clamp(25px,3.6vw,32px);max-width:580px}
+.programme__section-title>span{font-size:clamp(17px,2.4vw,22px)}
+.programme__section-title h2{font-size:clamp(44px,7vw,72px)}
+.programme__people h3,.programme__party h3{font-size:clamp(18px,2.5vw,23px);line-height:1.3;letter-spacing:.08em}
+.programme__people li,.programme__party p{font-size:clamp(23px,3.4vw,30px);line-height:1.5}
+.programme__ceremony li{font-size:clamp(22px,3.3vw,29px)}
+.programme__number{font-size:clamp(16px,2vw,19px)}
+.programme__footer a{font-size:clamp(15px,2vw,18px)}
