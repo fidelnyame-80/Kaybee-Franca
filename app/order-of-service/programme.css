@@ -109,3 +109,8 @@
 .programme__side-menu:not([open]) .programme__side-nav{display:none}
 .programme__side-menu[open] .programme__side-nav{position:absolute;right:0;top:calc(100% + 6px);transform:none;max-width:min(78vw,240px);width:max-content}
 @media(max-width:600px){.programme__side-menu>summary{min-height:54px;padding:8px 6px}.programme__side-menu[open] .programme__side-nav a{font-size:12px;min-height:43px}}
+
+/* Deliberate, balanced photography dropdown indicator. */
+.programme__photography-chevron{display:grid;place-items:center;flex:none;width:38px;height:38px;border:1px solid #e0c4c6;border-radius:50%;background:#fff0ed;transition:transform .2s ease}
+.programme__photography-chevron svg{display:block;width:21px;height:21px}
+.programme__photography-details[open] .programme__photography-chevron{transform:rotate(180deg)}
