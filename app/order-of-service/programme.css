@@ -68,3 +68,19 @@
 .programme__ceremony>li .programme__hymn h3{font-size:clamp(30px,5vw,46px)}
 .programme__ceremony>li .programme__hymn-verse{font-size:clamp(21px,3vw,27px)}
 #hymns,#hymn-faithfulness{scroll-margin-top:20px}
+
+/* Compact, expandable photography order after the ceremony */
+#photography{scroll-margin-top:24px}
+.programme__photography{margin-top:clamp(48px,8vw,90px)}
+.programme__photography-intro{text-align:center;font:italic clamp(21px,3vw,27px)/1.4 var(--serif);color:#89566a;margin:0 auto 28px;max-width:560px}
+.programme__photography-details{max-width:720px;margin:auto;border:1px solid #d9b9b6;background:#fff8f1}
+.programme__photography-details summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px clamp(18px,4vw,34px);font:600 clamp(20px,3.5vw,28px)/1.25 var(--serif);color:#751637;list-style:none}
+.programme__photography-details summary::-webkit-details-marker{display:none}
+.programme__photography-details summary:focus-visible{outline:3px solid #b84c6c;outline-offset:3px}
+.programme__photography-chevron{font:400 36px/1 var(--serif);transition:transform .2s}
+.programme__photography-details[open] .programme__photography-chevron{transform:rotate(180deg)}
+.programme__photography-lead{margin:0;padding:20px 28px 8px;font:italic clamp(21px,3vw,26px) var(--serif);color:#92566a;border-top:1px solid #e9d1c9}
+.programme__photography-list{list-style:none;margin:0;padding:8px clamp(16px,4vw,32px) 24px}
+.programme__photography-list li{display:grid;grid-template-columns:36px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid #efddd5;font:400 clamp(19px,2.8vw,25px)/1.35 var(--serif)}
+.programme__photography-list li:last-child{border-bottom:0}
+.programme__photography-list li span:first-child{font:700 15px/1.7 var(--sans);color:#ae5872}
