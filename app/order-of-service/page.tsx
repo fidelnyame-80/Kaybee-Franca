@@ -91,7 +91,7 @@ export default function OrderOfServicePage() {
           <div className="programme__section-title"><span>04</span><h2 id="photography-heading">Order of Photography</h2></div>
           <p className="programme__photography-intro">A little moment with everyone who made our day special.</p>
           <details className="programme__photography-details">
-            <summary><span>View photography sequence</span><span className="programme__photography-chevron" aria-hidden="true">⌄</span></summary>
+            <summary><span>View photography sequence</span><span className="programme__photography-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg></span></summary>
             <p className="programme__photography-lead">Couple with</p>
             <ol className="programme__photography-list"><li><span>01</span><span>Officiating Ministers</span></li>
 <li><span>02</span><span>All Pastors</span></li>
