@@ -115,8 +115,8 @@ export default function Home() {
             </div>
             <a className="service-preview__button" href="/order-of-service">
               <span>View our Order of Service</span>
-              <span className="service-preview__button-icon" aria-hidden="true">♡</span>
             </a>
+            <span className="service-preview__button-heart" aria-hidden="true">♡</span>
             <p className="service-preview__footnote">Kaybee <span>&amp;</span> Franca · Forever starts here</p>
           </ScrollReveal>
         </section>
