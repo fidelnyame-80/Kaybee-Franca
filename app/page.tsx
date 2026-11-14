@@ -1,6 +1,7 @@
 import Quiz from "./components/Quiz";
 import Reveal from "./components/Reveal";
 import Countdown from "./components/Countdown";
+import InvitationConfetti from "./components/InvitationConfetti";
 import WeddingBingo from "./components/WeddingBingo";
 import HeroAnimation from "./components/HeroAnimation";
 import MomentsCarousel from "./components/MomentsCarousel";
@@ -63,6 +64,7 @@ export default function Home() {
 
         <section className="wedding-invitation" id="our-day" aria-labelledby="day-heading">
           <InvitationFlorals />
+          <InvitationConfetti />
           <ScrollReveal className="wedding-invitation__card">
             <p className="wedding-invitation__eyebrow">A DAY FOR LOVE. A LIFETIME TOGETHER.</p>
             <h2 className="wedding-invitation__heading" id="day-heading">
