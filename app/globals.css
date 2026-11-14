@@ -1265,3 +1265,13 @@ a { color: inherit; text-decoration: none; }
 .service-preview__button-icon{display:grid;place-items:center;width:50px;height:50px;flex:none;background:#f4c450;color:#661632;font-size:32px;font-family:var(--serif)}
 .service-preview__inner>p.service-preview__footnote{font:400 clamp(20px,3vw,28px) var(--script);margin:30px auto 0;color:#8e3c57}.service-preview__footnote span{color:#c35873}
 @media(max-width:560px){.service-preview{padding:55px 17px}.service-preview__inner{padding:78px 19px 55px}.service-preview__corner{font-size:32px}.service-preview__corner--tl,.service-preview__corner--bl{left:17px}.service-preview__corner--tr,.service-preview__corner--br{right:17px}.service-preview__stamp{width:70px;height:70px;right:22px;top:-30px}.service-preview__stamp>span{font-size:29px}.service-preview__stamp small{font-size:10px}.service-preview__details{gap:8px}.service-preview__button{width:100%;min-height:76px}.service-preview__button-icon{width:43px;height:43px}}
+
+/* Continuous confetti across the entire A DAY FOR LOVE invitation section */
+.wedding-invitation{position:relative;isolation:isolate;overflow:hidden}
+.wedding-invitation .wedding-invitation__card{position:relative;z-index:2}
+.invitation-confetti{position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none}
+.invitation-confetti__piece{position:absolute;top:0;width:9px;height:14px;opacity:.9;border-radius:2px;animation:invitation-confetti-fall linear infinite;will-change:top,transform}
+.invitation-confetti__piece:nth-child(3n){width:7px;height:7px;border-radius:50%}
+.invitation-confetti__piece:nth-child(5n){width:5px;height:17px}
+@keyframes invitation-confetti-fall{from{top:-25px;transform:translateX(0) rotate(var(--confetti-rotation))}to{top:calc(100% + 25px);transform:translateX(var(--confetti-drift)) rotate(900deg)}}
+@media(prefers-reduced-motion:reduce){.invitation-confetti__piece{animation:none;top:25%;opacity:.45}.invitation-confetti__piece:nth-child(2n){top:65%}}
