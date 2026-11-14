@@ -121,7 +121,6 @@ export default function MomentsCarousel() {
                 sizes="(max-width: 720px) 78vw, 480px"
                 loading={index < 2 ? "eager" : "lazy"}
                 fetchPriority={index === 0 ? "high" : "auto"}
-                quality={70}
               />
               <figcaption>
                 <span>{String((index % couplePhotos.length) + 1).padStart(2, "0")}</span>
