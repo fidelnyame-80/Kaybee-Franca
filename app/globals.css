@@ -1234,3 +1234,13 @@ a { color: inherit; text-decoration: none; }
 .countdown__caption--celebration{font:600 clamp(38px,8cqw,78px)/1.15 var(--display);letter-spacing:-.035em;text-transform:none;color:var(--burgundy);margin:20px auto 12px;text-shadow:0 2px 0 #fff7eb}
 @keyframes countdown-confetti-fall{from{transform:translate3d(0,-10px,0) rotate(var(--confetti-rotation))}to{transform:translate3d(var(--confetti-drift),320px,0) rotate(900deg)}}
 @media(prefers-reduced-motion:reduce){.countdown__confetti-piece{animation:none;top:30%;opacity:.5}.countdown__confetti-piece:nth-child(3n){top:70%}}
+
+/* Confetti visibility fix: travel across the entire countdown rather than only 320px. */
+.countdown{min-height:260px}
+.countdown__confetti{z-index:5;inset:0;overflow:hidden}
+.countdown__confetti-piece{top:0;opacity:1;width:10px;height:16px;animation-name:countdown-confetti-full-fall;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes countdown-confetti-full-fall{
+  0%{top:-20px;transform:translateX(0) rotate(var(--confetti-rotation))}
+  100%{top:calc(100% + 20px);transform:translateX(var(--confetti-drift)) rotate(900deg)}
+}
+@media(prefers-reduced-motion:reduce){.countdown__confetti-piece{animation:none;top:20%;opacity:.6}}
