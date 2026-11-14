@@ -50,14 +50,23 @@ export default function OrderOfServicePage() {
         <section className="programme__hymn" aria-labelledby="hymn-showers">
           <p className="programme__hymn-kicker">HYMN ONE</p>
           <h3 id="hymn-showers">Showers of Blessing</h3>
-          <p className="programme__hymn-verse">There shall be showers of blessing;<br />This is the promise of love;<br />There shall be seasons refreshing,<br />Sent from the Savior above.</p>
-          <p className="programme__hymn-chorus-label">CHORUS</p>
-          <p className="programme__hymn-verse">Showers of blessing,<br />Showers of blessing we need;<br />Mercy drops round us are falling,<br />But for the showers we plead.</p>
+          {[
+            ["There shall be showers of blessing;", "This is the promise of love;", "There shall be seasons refreshing,", "Sent from the Savior above."],
+            ["There shall be showers of blessing,", "Precious reviving again;", "Over the hills and the valleys,", "Sound of abundance of rain."],
+            ["There shall be showers of blessing:", "Send them upon us, O Lord;", "Grant to us now a refreshing,", "Come and now honor Thy Word."],
+            ["There shall be showers of blessing:", "Oh, that today they might fall,", "Now as to God we're confessing,", "Now as on Jesus we call!"],
+          ].map((lines, index) => <div className="programme__stanza" key={index}>
+            <p className="programme__hymn-chorus-label">VERSE {index + 1}</p>
+            <p className="programme__hymn-verse">{lines.map((line, i) => <span key={i}>{line}<br /></span>)}</p>
+            <p className="programme__hymn-chorus-label">CHORUS</p>
+            <p className="programme__hymn-verse">Showers of blessing,<br />Showers of blessing we need;<br />Mercy drops round us are falling,<br />But for the showers we plead.</p>
+          </div>)}
         </section>
         <section className="programme__hymn" aria-labelledby="hymn-faithfulness">
           <p className="programme__hymn-kicker">HYMN TWO</p>
           <h3 id="hymn-faithfulness">Great Is Thy Faithfulness</h3>
-          <p className="programme__hymn-note">Congregational hymn</p>
+          <p className="programme__hymn-note">Follow the complete three verses and refrain:</p>
+          <a className="programme__hymn-link" href="https://hymnary.org/text/great_is_thy_faithfulness_o_god_my_fathe" target="_blank" rel="noopener noreferrer">Read full hymn lyrics ↗</a>
         </section>
       </div>
       <footer className="programme__footer"><p>And so our forever begins…</p><span>Kaybee & Franca</span><Link href="/">RETURN TO WEDDING WEBSITE ↗</Link></footer>
