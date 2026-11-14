@@ -1401,3 +1401,10 @@ a { color: inherit; text-decoration: none; }
 .gift-details__card--momo dd.gift-details__number{display:block;font:700 clamp(25px,6.4vw,36px)/1.2 var(--sans);letter-spacing:.035em;overflow-wrap:anywhere;color:#681b3a}
 .gift-details__card--momo .gift-details__copy{margin-top:20px}
 @media(max-width:650px){.rsvp-contacts ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px}.rsvp-contacts li{min-width:0}.rsvp-contacts a{font-size:clamp(15px,4vw,21px);overflow-wrap:anywhere}}
+
+/* Explicit MoMo number highlight: do not rely on generic dl row layout. */
+.gift-details__card--momo .gift-details__momo-number-row{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;width:100%;box-sizing:border-box;padding:18px 16px;margin:12px 0 20px;background:#f6e4e5;border:1px solid #e5bfc5;border-radius:10px;text-align:left}
+.gift-details__card--momo .gift-details__momo-number-row dt{display:block;width:100%;font:700 13px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#7b304d;text-align:left}
+.gift-details__card--momo .gift-details__momo-number-row dd.gift-details__number{display:block;width:100%;max-width:100%;margin:0;text-align:left;font:700 clamp(25px,5.5vw,34px)/1.2 var(--sans);font-variant-numeric:tabular-nums;letter-spacing:.015em;color:#57152e;overflow-wrap:anywhere}
+.gift-details__card--momo dl>div:not(.gift-details__momo-number-row){display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.gift-details__card--momo dl>div:not(.gift-details__momo-number-row) dd{max-width:100%;text-align:left;overflow-wrap:anywhere}
