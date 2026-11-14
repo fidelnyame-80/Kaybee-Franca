@@ -53,8 +53,6 @@ export default function OrderOfServicePage() {
           {[
             ["There shall be showers of blessing;", "This is the promise of love;", "There shall be seasons refreshing,", "Sent from the Savior above."],
             ["There shall be showers of blessing,", "Precious reviving again;", "Over the hills and the valleys,", "Sound of abundance of rain."],
-            ["There shall be showers of blessing:", "Send them upon us, O Lord;", "Grant to us now a refreshing,", "Come and now honor Thy Word."],
-            ["There shall be showers of blessing:", "Oh, that today they might fall,", "Now as to God we're confessing,", "Now as on Jesus we call!"],
           ].map((lines, index) => <div className="programme__stanza" key={index}>
             <p className="programme__hymn-chorus-label">VERSE {index + 1}</p>
             <p className="programme__hymn-verse">{lines.map((line, i) => <span key={i}>{line}<br /></span>)}</p>
