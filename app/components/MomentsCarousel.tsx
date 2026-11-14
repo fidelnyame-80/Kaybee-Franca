@@ -118,8 +118,9 @@ export default function MomentsCarousel() {
                 src={photo.src}
                 alt={isClone ? "" : photo.alt}
                 fill
-                sizes="(max-width: 720px) 78vw, 480px"
+                sizes="(max-width: 720px) 66vw, 480px"
                 loading="lazy"
+                quality={65}
               />
               <figcaption>
                 <span>{String((index % couplePhotos.length) + 1).padStart(2, "0")}</span>
