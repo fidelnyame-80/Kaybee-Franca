@@ -114,8 +114,8 @@ export default function Home() {
               <span>THE BLESSING</span>
             </div>
             <a className="service-preview__button" href="/order-of-service">
-              <span>VIEW OUR ORDER OF SERVICE</span>
-              <span className="service-preview__button-icon" aria-hidden="true">↗</span>
+              <span>View our Order of Service</span>
+              <span className="service-preview__button-icon" aria-hidden="true">♡</span>
             </a>
             <p className="service-preview__footnote">Kaybee <span>&amp;</span> Franca · Forever starts here</p>
           </ScrollReveal>
