@@ -99,3 +99,13 @@
 .programme__hero .programme__rule{background:rgba(255,244,226,.82)}
 .programme__hero .programme__script,.programme__hero .programme__intro{color:#fffaf2}
 @media(max-width:600px){.programme__hero{background-position:50% 38%}}
+
+/* Right-edge collapsed navigation: content is unobstructed until the guest taps MENU. */
+.programme__side-menu{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;align-items:flex-end;max-width:min(78vw,240px)}
+.programme__side-menu>summary{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;min-height:58px;padding:10px 9px;color:#fffaf2;background:#681b3a;border-radius:12px 0 0 12px;box-shadow:0 5px 18px #3d0a2340;list-style:none;font:700 10px/1.1 var(--sans);letter-spacing:.05em;writing-mode:vertical-rl}
+.programme__side-menu>summary::-webkit-details-marker{display:none}
+.programme__side-menu>summary:focus-visible{outline:3px solid #efafc1;outline-offset:3px}
+.programme__side-menu>summary span:first-child{font-size:18px;line-height:1}
+.programme__side-menu:not([open]) .programme__side-nav{display:none}
+.programme__side-menu[open] .programme__side-nav{position:absolute;right:0;top:calc(100% + 6px);transform:none;max-width:min(78vw,240px);width:max-content}
+@media(max-width:600px){.programme__side-menu>summary{min-height:54px;padding:8px 6px}.programme__side-menu[open] .programme__side-nav a{font-size:12px;min-height:43px}}
