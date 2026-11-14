@@ -4,6 +4,8 @@ import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 import { bucket, configured, r2 } from "../../../lib/r2";
 
+const ADMIN_EMAIL = "nyamefidel7@gmail.com";
+
 export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   if (!configured()) return NextResponse.json({ error: "Storage is not configured" }, { status: 503 });
@@ -33,6 +35,7 @@ export async function POST(request: NextRequest) {
     const auth = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false }, global: { headers: { Authorization: `Bearer ${token}` } } });
     const { data: { user }, error } = await auth.auth.getUser(token);
     if (error || !user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (user.email?.toLowerCase() !== ADMIN_EMAIL) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     const { data: moderator, error: roleError } = await auth.from("wedding_moderators").select("user_id").eq("user_id", user.id).maybeSingle();
     if (roleError || !moderator) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
