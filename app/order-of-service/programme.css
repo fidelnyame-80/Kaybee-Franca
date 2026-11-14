@@ -1,0 +1,24 @@
+.programme{min-height:100vh;padding:clamp(12px,3vw,42px);background:radial-gradient(ellipse at top,#f7d7cd 0%,#fff4e5 48%,#f2d5cb 100%);color:#4c172b}
+.programme__frame{max-width:900px;margin:auto;background:#fffaf0;border:1px solid #d9b4a7;box-shadow:0 18px 65px #5b19301c;overflow:hidden}
+.programme__nav{display:flex;justify-content:space-between;align-items:center;padding:24px clamp(22px,6vw,65px);font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.programme__nav a:hover,.programme__footer a:hover{text-decoration:underline}
+.programme__nav span{font:500 24px var(--display)}.programme__nav i{color:#bf4567;font-family:var(--script)}
+.programme__hero{text-align:center;padding:55px 20px 85px;background:radial-gradient(circle at 50% 15%,#fff2b9 0,transparent 65%),#fae1d7;border-bottom:1px solid #dcb8a8}
+.programme__ornament{color:#b84a68;font-size:24px;letter-spacing:14px}.programme__eyebrow,.programme__date{font:600 12px var(--sans);letter-spacing:.26em}.programme__eyebrow{margin-top:35px}
+.programme__hero h1{font:400 clamp(52px,10vw,96px)/1.1 var(--display);margin:12px 0 18px;letter-spacing:-.045em}
+.programme__hero h1 em{font:400 .85em var(--script);color:#b74e6c}.programme__date{color:#97455b}
+.programme__rule{display:block;width:85px;height:1px;background:#bd6a7b;margin:34px auto 20px}
+.programme__script{font:400 clamp(43px,8vw,70px) var(--script);margin:0;color:#9b204b}
+.programme__intro{font:italic 22px/1.4 var(--serif);max-width:390px;margin:12px auto 0}
+.programme__body{padding:clamp(26px,7vw,80px)}
+.programme__section-title{text-align:center;margin:0 0 42px}.programme__section-title>span{font:600 12px var(--sans);color:#bb5572;letter-spacing:.2em}
+.programme__section-title h2{font:400 clamp(36px,6vw,60px) var(--display);margin:8px 0}.programme__section-title:after{content:"✦";display:block;color:#c97580;margin-top:15px}
+.programme__people{text-align:center;margin-bottom:38px}.programme__people h3,.programme__party h3{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.2em;color:#ad4966;margin:0 0 15px}
+.programme__people ul{list-style:none;padding:0;margin:0}.programme__people li,.programme__party p{font:400 23px/1.5 var(--serif);margin:0}
+.programme__party{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;text-align:center;padding:30px 0;border-top:1px solid #ead5ca;border-bottom:1px solid #ead5ca;margin-bottom:35px}
+.programme__columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:35px}
+.programme__section-title--ceremony{margin-top:85px}
+.programme__ceremony{list-style:none;padding:0;margin:0 auto;max-width:650px}.programme__ceremony li{display:grid;grid-template-columns:50px 1fr;gap:15px;align-items:baseline;border-bottom:1px solid #ead8cc;padding:17px 0;font:400 clamp(19px,3vw,24px)/1.3 var(--serif)}
+.programme__number{font:600 11px var(--sans);color:#b55370;letter-spacing:.08em}
+.programme__footer{text-align:center;background:#6e1735;color:#fff2e5;padding:55px 20px 60px}.programme__footer p{font:400 44px var(--script);margin:0}.programme__footer span{display:block;font:400 29px var(--display);margin:10px 0 35px}.programme__footer a{display:inline-block;border:1px solid #f3c3be;padding:14px 22px;font:600 11px var(--sans);letter-spacing:.13em}
+@media(max-width:560px){.programme__hero{padding:35px 18px 55px}.programme__nav{padding:18px}.programme__party,.programme__columns{grid-template-columns:1fr;gap:26px}.programme__people li,.programme__party p{font-size:21px}.programme__section-title--ceremony{margin-top:55px}}
