@@ -28,8 +28,17 @@ export default function OrderOfServicePage() {
         <p className="programme__script">Order of Service</p>
         <p className="programme__intro">With love and gratitude, we welcome you to share in our special day.</p>
       </header>
+      <nav className="programme__contents" aria-label="Wedding programme contents">
+        <p className="programme__contents-eyebrow">FIND YOUR WAY</p>
+        <h2>Programme Menu</h2>
+        <div className="programme__contents-links">
+          <a href="#functionaries"><span>01</span> Functionaries <span aria-hidden="true">↗</span></a>
+          <a href="#ceremony"><span>02</span> Order of Ceremony <span aria-hidden="true">↗</span></a>
+          <a href="#hymns"><span>03</span> Wedding Hymns <span aria-hidden="true">↗</span></a>
+        </div>
+      </nav>
       <div className="programme__body">
-        <div className="programme__section-title"><span>01</span><h2>Functionaries</h2></div>
+        <div id="functionaries" className="programme__section-title"><span>01</span><h2>Functionaries</h2></div>
         <p className="programme__group-label">Bridal Party &amp; Wedding Functionaries</p>
         <People title="Officiating Ministers" names={officiatingMinisters} />
         <div className="programme__party">
@@ -44,9 +53,9 @@ export default function OrderOfServicePage() {
           <div><h3>Gift Table</h3><p>Deborah Kwaitoo</p></div>
           <div><h3>Protocol</h3><p>Juwaida Bukari</p></div>
         </div>
-        <div className="programme__section-title programme__section-title--ceremony"><span>02</span><h2>Order of Ceremony</h2></div>
+        <div id="ceremony" className="programme__section-title programme__section-title--ceremony"><span>02</span><h2>Order of Ceremony</h2></div>
         <ol className="programme__ceremony">{ceremony.map((item, i) => <li key={i}><span className="programme__number">{String(i + 1).padStart(2, "0")}</span><span>{item}</span></li>)}</ol>
-        <div className="programme__section-title programme__section-title--hymns"><span>03</span><h2>Wedding Hymns</h2></div>
+        <div id="hymns" className="programme__section-title programme__section-title--hymns"><span>03</span><h2>Wedding Hymns</h2></div>
         <section className="programme__hymn" aria-labelledby="hymn-showers">
           <p className="programme__hymn-kicker">HYMN ONE</p>
           <h3 id="hymn-showers">Showers of Blessing</h3>
