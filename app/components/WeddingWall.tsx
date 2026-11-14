@@ -18,7 +18,7 @@ export function WeddingWallNote({ shared }: { shared: boolean }) {
         <p className="wedding-wall__note-kicker">A LITTLE NOTE FROM US</p>
         <h2 id="memories-heading">Wedding <em>memories</em></h2>
         <span className="wedding-wall__note-rule" aria-hidden="true">♡</span>
-        <p className="wedding-wall__note-copy">The laughter, the happy tears, the little moments our camera team might miss. Share your wedding-day photos and videos, and come back to relive them with us.</p>
+        <p className="wedding-wall__note-copy">Dear guests, did you capture a lovely moment of Kaybee &amp; Franca at our wedding? Please add the photos and videos you took of us, so we can see the special moments through your eyes.</p>
         <div className="wedding-wall__note-photos">
           {featuredPhotos.map((photo) => (
             <figure className="wedding-wall__note-photo" key={photo.src}>
@@ -28,7 +28,7 @@ export function WeddingWallNote({ shared }: { shared: boolean }) {
         </div>
         <div className="wedding-wall__actions">
           <Link className="wedding-wall__view" href="/wedding-wall">VIEW WEDDING WALL <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 4l11 11M6 15h9V6" /></svg></Link>
-          <Link className="couple-memories__upload wedding-wall__add" href="/wedding-wall#add-to-wedding-wall"><span aria-hidden="true">＋</span>ADD TO WEDDING WALL</Link>
+          <Link className="couple-memories__upload wedding-wall__add" href="/wedding-wall#add-to-wedding-wall"><span aria-hidden="true">＋</span>ADD PHOTOS OF THE COUPLE</Link>
         </div>
         <p className="wedding-wall__note-status">
           {shared
