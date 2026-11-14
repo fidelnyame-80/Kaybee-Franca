@@ -1223,3 +1223,14 @@ a { color: inherit; text-decoration: none; }
 .service-preview h2{font-size:clamp(55px,9vw,104px)}
 .service-preview__inner>p:not(.section-kicker){font-size:clamp(25px,3.7vw,34px);max-width:620px;line-height:1.4}
 .service-preview__button{font-size:clamp(16px,2.2vw,21px);min-height:76px;line-height:1.35;letter-spacing:.045em;text-align:center}
+
+/* Continuous wedding-day confetti: contained to the countdown, with accessible reduced-motion support */
+.countdown{position:relative;isolation:isolate;overflow:hidden;min-height:150px;padding-bottom:clamp(20px,4cqw,45px)}
+.countdown__foreground{position:relative;z-index:1;pointer-events:none}
+.countdown__confetti{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.countdown__confetti-piece{position:absolute;top:-14px;width:8px;height:13px;opacity:.85;border-radius:2px;transform:rotate(var(--confetti-rotation));animation:countdown-confetti-fall linear infinite;will-change:transform}
+.countdown__confetti-piece:nth-child(3n){width:6px;height:6px;border-radius:50%}
+.countdown__confetti-piece:nth-child(5n){width:5px;height:16px}
+.countdown__caption--celebration{font:600 clamp(38px,8cqw,78px)/1.15 var(--display);letter-spacing:-.035em;text-transform:none;color:var(--burgundy);margin:20px auto 12px;text-shadow:0 2px 0 #fff7eb}
+@keyframes countdown-confetti-fall{from{transform:translate3d(0,-10px,0) rotate(var(--confetti-rotation))}to{transform:translate3d(var(--confetti-drift),320px,0) rotate(900deg)}}
+@media(prefers-reduced-motion:reduce){.countdown__confetti-piece{animation:none;top:30%;opacity:.5}.countdown__confetti-piece:nth-child(3n){top:70%}}
