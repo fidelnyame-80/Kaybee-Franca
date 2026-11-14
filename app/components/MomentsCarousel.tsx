@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
 import { couplePhotos } from "../site-content";
 
 export default function MomentsCarousel() {
@@ -70,43 +69,6 @@ export default function MomentsCarousel() {
     };
   }, []);
 
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const slides = Array.from(track.querySelectorAll<HTMLElement>(".moments-carousel__slide:not([aria-hidden='true'])"));
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (reduceMotion || !("IntersectionObserver" in window)) return;
-
-    const observed = new Set<Element>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting || observed.has(entry.target)) return;
-          observed.add(entry.target);
-          observer.unobserve(entry.target);
-          gsap.fromTo(
-            entry.target,
-            { autoAlpha: 0, x: 34, rotate: entry.target === slides[1] ? 3 : -3 },
-            {
-              autoAlpha: 1,
-              x: 0,
-              rotate: 0,
-              duration: 0.8,
-              ease: "power3.out",
-            },
-          );
-        });
-      },
-      { root: track, threshold: 0.2 },
-    );
-
-    slides.forEach((slide) => observer.observe(slide));
-    return () => observer.disconnect();
-  }, []);
-
   const startDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse") return;
     const track = event.currentTarget;
@@ -157,7 +119,9 @@ export default function MomentsCarousel() {
                 alt={isClone ? "" : photo.alt}
                 fill
                 sizes="(max-width: 720px) 78vw, 480px"
-                unoptimized
+                loading={index < 2 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "auto"}
+                quality={70}
               />
               <figcaption>
                 <span>{String((index % couplePhotos.length) + 1).padStart(2, "0")}</span>
