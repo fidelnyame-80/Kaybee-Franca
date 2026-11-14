@@ -95,11 +95,27 @@ export default function Home() {
 
         <section className="service-preview" id="order-of-service" aria-labelledby="service-preview-heading">
           <ScrollReveal className="service-preview__inner">
+            <div className="service-preview__corner service-preview__corner--tl" aria-hidden="true">✿</div>
+            <div className="service-preview__corner service-preview__corner--tr" aria-hidden="true">✿</div>
+            <div className="service-preview__corner service-preview__corner--bl" aria-hidden="true">✿</div>
+            <div className="service-preview__corner service-preview__corner--br" aria-hidden="true">✿</div>
+            <div className="service-preview__stamp" aria-hidden="true"><span>14</span><small>NOV<br />2026</small></div>
             <p className="section-kicker">THE WEDDING PROGRAMME</p>
-            <span className="service-preview__ornament" aria-hidden="true">✦</span>
+            <div className="service-preview__flourish" aria-hidden="true">
+              <svg viewBox="0 0 310 50" fill="none"><path d="M4 25h94c25 0 26-20 9-20-18 0-8 40 48 20 56-20 66 20 48 20-17 0-16-20 9-20h94" stroke="currentColor" strokeWidth="1.5"/><path d="M155 16l8 9-8 9-8-9z" fill="currentColor"/></svg>
+            </div>
             <h2 id="service-preview-heading">Order of <em>Service</em></h2>
-            <p>Follow along as we celebrate our love, exchange our vows, and begin our forever.</p>
-            <a className="service-preview__button" href="/order-of-service">CLICK TO VIEW ORDER OF SERVICE <span aria-hidden="true">↗</span></a>
+            <p className="service-preview__subtitle">A beautiful beginning, one sacred moment at a time.</p>
+            <div className="service-preview__details" aria-label="Programme highlights">
+              <span>THE PROCESSION</span><b aria-hidden="true">✦</b>
+              <span>THE VOWS</span><b aria-hidden="true">✦</b>
+              <span>THE BLESSING</span>
+            </div>
+            <a className="service-preview__button" href="/order-of-service">
+              <span>VIEW OUR ORDER OF SERVICE</span>
+              <span className="service-preview__button-icon" aria-hidden="true">↗</span>
+            </a>
+            <p className="service-preview__footnote">Kaybee <span>&amp;</span> Franca · Forever starts here</p>
           </ScrollReveal>
         </section>
 
