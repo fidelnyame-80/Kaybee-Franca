@@ -1296,3 +1296,8 @@ a { color: inherit; text-decoration: none; }
 .service-preview__button:hover{background:#681c3d;transform:translateY(-2px);box-shadow:0 14px 28px rgba(92,23,51,.18)}
 .service-preview__button-icon{display:inline;flex:none;width:auto;height:auto;background:none;color:#f7ced8;font:400 31px/1 var(--serif)}
 @media(max-width:560px){.service-preview__stamp{right:15px;top:-18px}.service-preview__inner{padding-top:90px}.service-preview__button{width:100%;padding:18px 16px;gap:10px}.service-preview__button-icon{width:auto;height:auto}}
+
+/* Confetti starts only when A Day for Love enters the viewport. */
+.invitation-confetti__piece{animation-name:none;opacity:0}
+.invitation-confetti--started .invitation-confetti__piece{animation-name:invitation-confetti-fall;animation-iteration-count:1;animation-fill-mode:forwards}
+@media(prefers-reduced-motion:reduce){.invitation-confetti--started .invitation-confetti__piece{animation:none;opacity:0}}
