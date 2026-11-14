@@ -30,6 +30,7 @@ export default function OrderOfServicePage() {
       </header>
       <div className="programme__body">
         <div className="programme__section-title"><span>01</span><h2>Functionaries</h2></div>
+        <p className="programme__group-label">Bridal Party &amp; Wedding Functionaries</p>
         <People title="Officiating Ministers" names={officiatingMinisters} />
         <div className="programme__party">
           <div><h3>Best Man</h3><p>Ps Joseph Vanderpuije</p></div>
@@ -45,6 +46,19 @@ export default function OrderOfServicePage() {
         </div>
         <div className="programme__section-title programme__section-title--ceremony"><span>02</span><h2>Order of Ceremony</h2></div>
         <ol className="programme__ceremony">{ceremony.map((item, i) => <li key={i}><span className="programme__number">{String(i + 1).padStart(2, "0")}</span><span>{item}</span></li>)}</ol>
+        <div className="programme__section-title programme__section-title--hymns"><span>03</span><h2>Wedding Hymns</h2></div>
+        <section className="programme__hymn" aria-labelledby="hymn-showers">
+          <p className="programme__hymn-kicker">HYMN ONE</p>
+          <h3 id="hymn-showers">Showers of Blessing</h3>
+          <p className="programme__hymn-verse">There shall be showers of blessing;<br />This is the promise of love;<br />There shall be seasons refreshing,<br />Sent from the Savior above.</p>
+          <p className="programme__hymn-chorus-label">CHORUS</p>
+          <p className="programme__hymn-verse">Showers of blessing,<br />Showers of blessing we need;<br />Mercy drops round us are falling,<br />But for the showers we plead.</p>
+        </section>
+        <section className="programme__hymn" aria-labelledby="hymn-faithfulness">
+          <p className="programme__hymn-kicker">HYMN TWO</p>
+          <h3 id="hymn-faithfulness">Great Is Thy Faithfulness</h3>
+          <p className="programme__hymn-note">Congregational hymn</p>
+        </section>
       </div>
       <footer className="programme__footer"><p>And so our forever begins…</p><span>Kaybee & Franca</span><Link href="/">RETURN TO WEDDING WEBSITE ↗</Link></footer>
     </div>
