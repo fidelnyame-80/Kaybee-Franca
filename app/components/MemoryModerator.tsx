@@ -3,6 +3,8 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { memoryClient } from "../lib/shared-memories";
 
+const ADMIN_EMAIL = "nyamefidel7@gmail.com";
+
 export default function MemoryModerator({ onAccessChange }: { onAccessChange: (allowed: boolean) => void }) {
   const [open, setOpen] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
@@ -20,9 +22,14 @@ export default function MemoryModerator({ onAccessChange }: { onAccessChange: (a
     const { data: { subscription } } = client.auth.onAuthStateChange((_event, session) => {
       const current = ++version;
       if (!active) return;
-      setSignedIn(Boolean(session?.user));
+      setSignedIn(Boolean(session?.user && session.user.email?.toLowerCase() === ADMIN_EMAIL));
       onAccessChange(false);
       if (!session?.user) return;
+      if (session.user.email?.toLowerCase() !== ADMIN_EMAIL) {
+        setMessage("This account is not authorized to manage wedding memories.");
+        void client.auth.signOut();
+        return;
+      }
 
       // Run database requests outside Supabase's auth callback.
       const timer = window.setTimeout(() => {
@@ -49,9 +56,14 @@ export default function MemoryModerator({ onAccessChange }: { onAccessChange: (a
   const signIn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!memoryClient) return;
+    if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
+      setMessage("Only the designated wedding administrator can sign in.");
+      setPassword("");
+      return;
+    }
     setBusy(true);
     setMessage("");
-    const { error } = await memoryClient.auth.signInWithPassword({ email, password });
+    const { error } = await memoryClient.auth.signInWithPassword({ email: ADMIN_EMAIL, password });
     setPassword("");
     if (error) setMessage("Could not sign in. Please check your email and password.");
     setBusy(false);
