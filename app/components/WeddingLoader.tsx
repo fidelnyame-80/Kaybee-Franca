@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { photos } from "../site-content";
 import FloatingMenu from "./FloatingMenu";
 
 export default function WeddingLoader({
@@ -81,19 +80,10 @@ export default function WeddingLoader({
       setIsLoading(false);
     };
 
-    // Welcome guests while the hero loads, but do not wait for the gallery.
-    const hero = new Image();
-    const heroReady = new Promise<void>((resolve) => {
-      hero.onload = () => resolve();
-      hero.onerror = () => resolve();
-      hero.src = photos.hero;
-      if (hero.complete) resolve();
-    });
-
-    // A stalled request or animation must not leave the welcome screen up forever.
-    const fallback = window.setTimeout(finish, 5000);
+    // Do not block the entire website on an image request.
+    const fallback = window.setTimeout(finish, 1600);
     intro.timeScale(2).play();
-    void Promise.all([intro.then(), heroReady]).then(() => {
+    void intro.then(() => {
       if (cancelled || finished) return;
 
       exit = gsap
@@ -124,8 +114,6 @@ export default function WeddingLoader({
     return () => {
       cancelled = true;
       window.clearTimeout(fallback);
-      hero.onload = null;
-      hero.onerror = null;
       intro.kill();
       exit?.kill();
       document.body.style.overflow = previousOverflow;
