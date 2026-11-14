@@ -91,3 +91,11 @@
 .programme__side-nav a:hover,.programme__side-nav a:focus-visible{background:#a84569;outline-offset:2px}
 .programme__side-number{color:#f5c4d0;font:700 11px/1.2 var(--sans)}
 @media(max-width:600px){.programme__side-nav{gap:2px;padding:6px 3px 6px 5px;border-radius:12px 0 0 12px}.programme__side-nav a{gap:5px;min-height:44px;padding:8px 7px;font-size:11px}.programme__side-number{font-size:10px}}
+
+/* Couple photograph only behind the Order of Service cover shown above the menu. */
+.programme__hero{position:relative;isolation:isolate;background:#f5dfd2 url("/image4.webp") center 42% / cover no-repeat;color:#fffaf2;text-shadow:0 2px 15px rgba(38,10,23,.55)}
+.programme__hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(45,12,27,.53) 0%,rgba(54,14,31,.58) 48%,rgba(43,11,27,.75) 100%)}
+.programme__hero .programme__eyebrow,.programme__hero .programme__date,.programme__hero .programme__ornament,.programme__hero h1 em{color:#fff0dd}
+.programme__hero .programme__rule{background:rgba(255,244,226,.82)}
+.programme__hero .programme__script,.programme__hero .programme__intro{color:#fffaf2}
+@media(max-width:600px){.programme__hero{background-position:50% 38%}}
