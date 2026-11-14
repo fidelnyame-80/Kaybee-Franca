@@ -37,11 +37,11 @@ export default function GiftDetails() {
         <CopyDetail value="0556136234" label="MOMO NUMBER" />
       </article>
       <article className="gift-details__card">
-        <p className="gift-details__eyebrow">BANK DETAILS</p>
+        <p className="gift-details__eyebrow">BANK TRANSFER DETAILS</p>
         <dl>
           <div><dt>Bank</dt><dd>Stanbic Bank</dd></div>
           <div><dt>Account name</dt><dd>Francisca Duodu</dd></div>
-          <div><dt>Account number</dt><dd className="gift-details__number">9040012612499</dd></div>
+          <div className="gift-details__account-row"><dt>Account number</dt><dd className="gift-details__number">9040012612499</dd></div>
           <div><dt>Branch</dt><dd>KNUST</dd></div>
         </dl>
         <CopyDetail value="9040012612499" label="ACCOUNT NUMBER" />
