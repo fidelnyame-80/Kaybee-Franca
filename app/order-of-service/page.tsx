@@ -35,6 +35,7 @@ export default function OrderOfServicePage() {
           <a href="#functionaries"><span>01</span> Functionaries <span aria-hidden="true">↗</span></a>
           <a href="#ceremony"><span>02</span> Order of Ceremony <span aria-hidden="true">↗</span></a>
           <a href="#hymns"><span>03</span> Hymns (within ceremony) <span aria-hidden="true">↗</span></a>
+          <a href="#photography"><span>04</span> Order of Photography <span aria-hidden="true">↗</span></a>
         </div>
       </nav>
       <div className="programme__body">
@@ -77,6 +78,39 @@ export default function OrderOfServicePage() {
             </section>}
           </li>)}
         </ol>
+        <section id="photography" className="programme__photography" aria-labelledby="photography-heading">
+          <div className="programme__section-title"><span>04</span><h2 id="photography-heading">Order of Photography</h2></div>
+          <p className="programme__photography-intro">A little moment with everyone who made our day special.</p>
+          <details className="programme__photography-details">
+            <summary><span>View photography sequence</span><span className="programme__photography-chevron" aria-hidden="true">⌄</span></summary>
+            <p className="programme__photography-lead">Couple with</p>
+            <ol className="programme__photography-list"><li><span>01</span><span>Officiating Ministers</span></li>
+<li><span>02</span><span>All Pastors</span></li>
+<li><span>03</span><span>Best Man</span></li>
+<li><span>04</span><span>Maid of Honour</span></li>
+<li><span>05</span><span>Groomsmen</span></li>
+<li><span>06</span><span>Bridesmaids</span></li>
+<li><span>07</span><span>Groom's parents</span></li>
+<li><span>08</span><span>Bride's parents</span></li>
+<li><span>09</span><span>Groom's family</span></li>
+<li><span>10</span><span>Bride's family</span></li>
+<li><span>11</span><span>Both families</span></li>
+<li><span>12</span><span>Couple with both parents</span></li>
+<li><span>13</span><span>API Pastors</span></li>
+<li><span>14</span><span>Fountain of life pastors</span></li>
+<li><span>15</span><span>Fountain of life family</span></li>
+<li><span>16</span><span>Basillisa staff</span></li>
+<li><span>17</span><span>Choir</span></li>
+<li><span>18</span><span>CPS</span></li>
+<li><span>19</span><span>Prempeh alumni</span></li>
+<li><span>20</span><span>Kumasi girls alumni</span></li>
+<li><span>21</span><span>KNUST alumni</span></li>
+<li><span>22</span><span>KSTU alumni</span></li>
+<li><span>23</span><span>Friends</span></li>
+<li><span>24</span><span>Ready at 20</span></li>
+<li><span>25</span><span>All friends in wedding colours</span></li></ol>
+          </details>
+        </section>
       </div>
       <footer className="programme__footer"><p>And so our forever begins…</p><span>Kaybee & Franca</span><Link href="/">RETURN TO WEDDING WEBSITE ↗</Link></footer>
     </div>
