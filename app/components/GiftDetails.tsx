@@ -49,7 +49,7 @@ export default function GiftDetails() {
       <article className="gift-details__card gift-details__card--momo">
         <p className="gift-details__eyebrow">MTN MOMO</p>
         <dl>
-          <div><dt>Number</dt><dd className="gift-details__number">0537620441</dd></div>
+          <div className="gift-details__momo-number-row"><dt>MoMo number</dt><dd className="gift-details__number">0537620441</dd></div>
           <div><dt>Name</dt><dd>Kwabena Boafo Agyepong</dd></div>
         </dl>
         <CopyDetail value="0537620441" label="MOMO NUMBER" />
