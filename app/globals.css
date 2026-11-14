@@ -1312,3 +1312,14 @@ a { color: inherit; text-decoration: none; }
 /* Wedding invitation confetti: continuously fall once the section is reached. */
 .invitation-confetti--started .invitation-confetti__piece{animation-name:invitation-confetti-fall;animation-iteration-count:infinite;animation-fill-mode:none;opacity:.9}
 @media(prefers-reduced-motion:reduce){.invitation-confetti--started .invitation-confetti__piece{animation:none;opacity:0}}
+
+/* Compact Order of Service homepage section without shrinking its typography. */
+.service-preview{padding-top:clamp(36px,5vw,65px);padding-bottom:clamp(38px,5vw,65px)}
+.service-preview__inner{padding-top:clamp(78px,8vw,100px);padding-bottom:clamp(18px,3vw,35px)}
+.service-preview__flourish{margin:12px auto 8px}
+.service-preview h2{margin-bottom:14px}
+.service-preview__inner>p.service-preview__subtitle{margin-bottom:20px}
+.service-preview__details{margin-bottom:22px;padding:13px 0}
+.service-preview__inner>p.service-preview__footnote{margin-top:6px}
+.service-preview__button-heart{margin-top:10px}
+@media(max-width:560px){.service-preview{padding:40px 17px}.service-preview__inner{padding:78px 12px 20px}}
