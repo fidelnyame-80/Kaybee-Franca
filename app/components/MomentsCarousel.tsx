@@ -12,38 +12,60 @@ export default function MomentsCarousel() {
   useEffect(() => {
     const track = trackRef.current;
     if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     let frame = 0;
     let previousTime = 0;
     let pauseUntil = 0;
-    const loopWidth = () => track.scrollWidth / 2;
-    const pauseGlide = () => {
-      pauseUntil = performance.now() + 5000;
+    let interacting = false;
+    const slides = track.querySelectorAll<HTMLElement>(".moments-carousel__slide");
+    const loopWidth = () => {
+      const first = slides[0];
+      const clone = slides[couplePhotos.length];
+      return first && clone ? clone.offsetLeft - first.offsetLeft : track.scrollWidth / 2;
     };
+    const pauseGlide = () => { pauseUntil = performance.now() + 1400; };
+    const startInteraction = () => { interacting = true; pauseGlide(); };
+    const endInteraction = () => { interacting = false; pauseGlide(); };
     const glide = (time: number) => {
-      if (previousTime && time > pauseUntil) {
-        const distance = Math.min(time - previousTime, 50) * 0.012;
-        const halfWidth = loopWidth();
-        if (halfWidth > 0) {
+      if (previousTime && !interacting && time >= pauseUntil && !document.hidden) {
+        const distance = Math.min(time - previousTime, 50) * 0.035;
+        const width = loopWidth();
+        if (width > 0) {
           track.scrollLeft += distance;
-          if (track.scrollLeft >= halfWidth) track.scrollLeft -= halfWidth;
+          if (track.scrollLeft >= width) track.scrollLeft -= width;
         }
       }
       previousTime = time;
       frame = window.requestAnimationFrame(glide);
     };
-    track.addEventListener("pointerdown", pauseGlide);
-    track.addEventListener("pointermove", pauseGlide);
+
+    track.addEventListener("pointerdown", startInteraction);
+    window.addEventListener("pointerup", endInteraction);
+    window.addEventListener("pointercancel", endInteraction);
     track.addEventListener("wheel", pauseGlide, { passive: true });
-    track.addEventListener("touchstart", pauseGlide, { passive: true });
+    track.addEventListener("touchstart", startInteraction, { passive: true });
+    track.addEventListener("touchend", endInteraction);
+    track.addEventListener("touchcancel", endInteraction);
+    track.addEventListener("mouseenter", startInteraction);
+    track.addEventListener("mouseleave", endInteraction);
+    track.addEventListener("focusin", startInteraction);
+    track.addEventListener("focusout", endInteraction);
     track.addEventListener("keydown", pauseGlide);
     frame = window.requestAnimationFrame(glide);
 
     return () => {
       window.cancelAnimationFrame(frame);
-      track.removeEventListener("pointerdown", pauseGlide);
-      track.removeEventListener("pointermove", pauseGlide);
+      track.removeEventListener("pointerdown", startInteraction);
+      window.removeEventListener("pointerup", endInteraction);
+      window.removeEventListener("pointercancel", endInteraction);
       track.removeEventListener("wheel", pauseGlide);
-      track.removeEventListener("touchstart", pauseGlide);
+      track.removeEventListener("touchstart", startInteraction);
+      track.removeEventListener("touchend", endInteraction);
+      track.removeEventListener("touchcancel", endInteraction);
+      track.removeEventListener("mouseenter", startInteraction);
+      track.removeEventListener("mouseleave", endInteraction);
+      track.removeEventListener("focusin", startInteraction);
+      track.removeEventListener("focusout", endInteraction);
       track.removeEventListener("keydown", pauseGlide);
     };
   }, []);
