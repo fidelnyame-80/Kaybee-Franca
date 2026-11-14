@@ -17,12 +17,15 @@ function People({ title, names }: { title: string; names: string[] }) {
 
 export default function OrderOfServicePage() {
   return <main className="programme">
-    <nav className="programme__side-nav" aria-label="Quick programme navigation">
-      <a href="#functionaries"><span className="programme__side-number">01</span><span>Functionaries</span></a>
-      <a href="#ceremony"><span className="programme__side-number">02</span><span>Ceremony</span></a>
-      <a href="#hymns"><span className="programme__side-number">03</span><span>Hymns</span></a>
-      <a href="#photography"><span className="programme__side-number">04</span><span>Photography</span></a>
-    </nav>
+    <details className="programme__side-menu">
+      <summary aria-label="Toggle programme navigation"><span aria-hidden="true">☰</span><span>MENU</span></summary>
+      <nav className="programme__side-nav" aria-label="Quick programme navigation">
+        <a href="#functionaries"><span className="programme__side-number">01</span><span>Functionaries</span></a>
+        <a href="#ceremony"><span className="programme__side-number">02</span><span>Ceremony</span></a>
+        <a href="#hymns"><span className="programme__side-number">03</span><span>Hymns</span></a>
+        <a href="#photography"><span className="programme__side-number">04</span><span>Photography</span></a>
+      </nav>
+    </details>
     <div className="programme__frame">
       <nav className="programme__nav"><Link href="/">← Back to our wedding</Link><span>K <i>&</i> F</span></nav>
       <header className="programme__hero">
