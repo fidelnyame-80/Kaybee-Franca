@@ -1275,3 +1275,10 @@ a { color: inherit; text-decoration: none; }
 .invitation-confetti__piece:nth-child(5n){width:5px;height:17px}
 @keyframes invitation-confetti-fall{from{top:-25px;transform:translateX(0) rotate(var(--confetti-rotation))}to{top:calc(100% + 25px);transform:translateX(var(--confetti-drift)) rotate(900deg)}}
 @media(prefers-reduced-motion:reduce){.invitation-confetti__piece{animation:none;top:25%;opacity:.45}.invitation-confetti__piece:nth-child(2n){top:65%}}
+
+/* Borderless, free-floating Order of Service section */
+.service-preview{background:#f8e2df;border:0;padding:clamp(75px,10vw,130px) clamp(18px,4vw,55px)}
+.service-preview__inner{background:transparent;border:0;outline:0;box-shadow:none;padding:clamp(48px,7vw,90px) clamp(12px,5vw,55px)}
+.service-preview__inner:before{display:none}
+.service-preview__corner{display:none}
+.service-preview__stamp{display:none}
