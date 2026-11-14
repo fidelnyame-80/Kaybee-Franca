@@ -93,6 +93,16 @@ export default function Home() {
           <ScrollReveal delay={0.12}><p className="moments__caption">the best is yet to come <span aria-hidden="true">♥</span></p></ScrollReveal>
         </section>
 
+        <section className="service-preview" id="order-of-service" aria-labelledby="service-preview-heading">
+          <ScrollReveal className="service-preview__inner">
+            <p className="section-kicker">THE WEDDING PROGRAMME</p>
+            <span className="service-preview__ornament" aria-hidden="true">✦</span>
+            <h2 id="service-preview-heading">Order of <em>Service</em></h2>
+            <p>Follow along as we celebrate our love, exchange our vows, and begin our forever.</p>
+            <a className="service-preview__button" href="/order-of-service">CLICK TO VIEW ORDER OF SERVICE <span aria-hidden="true">↗</span></a>
+          </ScrollReveal>
+        </section>
+
         <section className="photo-gallery" id="gallery" aria-labelledby="gallery-heading">
           <ScrollReveal className="photo-gallery__intro">
             <p className="section-kicker">THE PHOTO GALLERY</p>
