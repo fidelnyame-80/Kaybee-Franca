@@ -14,6 +14,7 @@ const pieces = Array.from({ length: 64 }, (_, i) => ({
 export default function InvitationConfetti() {
   const ref = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
     const section = ref.current?.closest(".wedding-invitation");
@@ -28,7 +29,13 @@ export default function InvitationConfetti() {
     return () => observer.disconnect();
   }, []);
 
-  return <div ref={ref} className={`invitation-confetti${started ? " invitation-confetti--started" : ""}`} aria-hidden="true">
+  useEffect(() => {
+    if (!started) return;
+    const timeout = window.setTimeout(() => setFinished(true), 10000);
+    return () => window.clearTimeout(timeout);
+  }, [started]);
+
+  return <div ref={ref} className={`invitation-confetti${started && !finished ? " invitation-confetti--started" : ""}`} aria-hidden="true">
     {pieces.map((piece, i) => <span key={i} className="invitation-confetti__piece" style={{
       left: piece.left,
       animationDelay: piece.delay,
