@@ -46,3 +46,16 @@
 .programme__hymn-note{font:italic clamp(22px,3vw,27px) var(--serif);margin:0}
 
 .programme__stanza{margin:30px auto 44px}.programme__stanza+.programme__stanza{padding-top:25px;border-top:1px solid #e4c3c5}.programme__hymn-link{display:inline-block;margin:25px auto 5px;padding:17px 24px;background:#751637;color:#fff9f1;border-radius:12px;font:700 clamp(19px,3vw,24px)/1.3 var(--sans);text-decoration:none}.programme__hymn-link:hover{background:#5d0e2b}
+
+/* Wedding programme contents menu */
+.programme{scroll-behavior:smooth}
+.programme__contents{padding:clamp(30px,5vw,55px) clamp(22px,7vw,85px);background:#fff3e8;text-align:center;border-bottom:1px solid #ead2ca}
+.programme__contents-eyebrow{font:700 clamp(15px,2.2vw,19px)/1.4 var(--sans);letter-spacing:.14em;color:#ae4c69;margin:0 0 7px}
+.programme__contents h2{font:400 clamp(39px,6vw,61px)/1.1 var(--display);margin:0 0 25px}
+.programme__contents-links{display:grid;gap:12px;max-width:650px;margin:auto}
+.programme__contents-links a{display:flex;align-items:center;gap:15px;min-height:68px;padding:16px clamp(15px,3vw,26px);background:#fffaf2;border:1px solid #ddb9b4;color:#641d3a;font:600 clamp(19px,3vw,25px)/1.25 var(--serif);text-align:left;text-decoration:none;transition:background .2s,transform .2s}
+.programme__contents-links a:hover,.programme__contents-links a:focus-visible{background:#f7dce0;transform:translateY(-2px)}
+.programme__contents-links a span:first-child{font:700 16px var(--sans);color:#b84c6c}
+.programme__contents-links a span:last-child{margin-left:auto;color:#ad4262}
+#functionaries,#ceremony,#hymns{scroll-margin-top:22px}
+@media(prefers-reduced-motion:no-preference){html:has(.programme){scroll-behavior:smooth}}
