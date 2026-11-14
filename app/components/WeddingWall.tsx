@@ -22,7 +22,7 @@ export function WeddingWallNote({ shared }: { shared: boolean }) {
         <div className="wedding-wall__note-photos">
           {featuredPhotos.map((photo) => (
             <figure className="wedding-wall__note-photo" key={photo.src}>
-              <div><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 720px) 28vw, 150px" unoptimized /></div>
+              <div><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 720px) 28vw, 150px" /></div>
             </figure>
           ))}
         </div>
@@ -82,7 +82,7 @@ export function WeddingWall({ children, galleryRef }: { children?: ReactNode; ga
       <div className="couple-memories__gallery" ref={galleryRef}>
         {featuredPhotos.map((photo) => (
           <figure className="couple-memories__card wedding-wall__feature" key={photo.src}>
-            <div className="couple-memories__photo"><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 900px) 44vw, 230px" unoptimized /></div>
+            <div className="couple-memories__photo"><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 900px) 44vw, 230px" /></div>
             <figcaption>{photo.caption}</figcaption>
           </figure>
         ))}
