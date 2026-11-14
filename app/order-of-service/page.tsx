@@ -73,7 +73,7 @@ export default function OrderOfServicePage() {
             {i === 12 && <section id="hymn-faithfulness" className="programme__hymn programme__hymn--inline" aria-labelledby="hymn-faithfulness-title">
               <p className="programme__hymn-kicker">HYMN TWO · SING ALONG</p>
               <h3 id="hymn-faithfulness-title">Great Is Thy Faithfulness</h3>
-              <p className="programme__hymn-note">Great is thy faithfulness, O God, my Father;</p>
+              <p className="programme__hymn-note">Great is thy faithfulness, O God, my Father;<br />There is no shadow of turning with thee.<br />Thou changest not, thy compassions, they fail not;<br />As thou hast been, thou forever wilt be.</p>
             </section>}
           </li>)}
         </ol>
