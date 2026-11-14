@@ -59,3 +59,12 @@
 .programme__contents-links a span:last-child{margin-left:auto;color:#ad4262}
 #functionaries,#ceremony,#hymns{scroll-margin-top:22px}
 @media(prefers-reduced-motion:no-preference){html:has(.programme){scroll-behavior:smooth}}
+
+/* Ceremony reads continuously; hymns appear at their actual place in the service. */
+.programme__ceremony>li.programme__ceremony-entry{display:block;padding:0;border:0}
+.programme__ceremony-item{display:grid;grid-template-columns:50px minmax(0,1fr);gap:15px;align-items:baseline;padding:17px 0;border-bottom:1px solid #ead8cc}
+.programme__hymn--inline{margin:24px auto 30px;max-width:100%;padding:30px clamp(12px,3vw,32px);border-top:2px solid #d9a4ae;border-bottom:2px solid #d9a4ae}
+.programme__ceremony>li .programme__hymn{font-size:inherit}
+.programme__ceremony>li .programme__hymn h3{font-size:clamp(30px,5vw,46px)}
+.programme__ceremony>li .programme__hymn-verse{font-size:clamp(21px,3vw,27px)}
+#hymns,#hymn-faithfulness{scroll-margin-top:20px}
